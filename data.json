@@ -1,0 +1,323 @@
+{
+ "actualizado": "2026-09-08 03:50 UTC",
+ "precios": {
+  "BTC": {
+   "usd": 78879,
+   "clp": 73719078
+  },
+  "XRP": {
+   "clp": 1303.13,
+   "usd": 1.39
+  },
+  "TRX": {
+   "clp": 313.04,
+   "usd": 0.334956
+  },
+  "LTC": {
+   "clp": 51587,
+   "usd": 55.2
+  },
+  "ETH": {
+   "clp": 2321491,
+   "usd": 2484.0
+  },
+  "BNB": {
+   "clp": 693985,
+   "usd": 742.56
+  },
+  "POL": {
+   "clp": 89.19,
+   "usd": 0.095437
+  },
+  "USDT": {
+   "clp": 934.38,
+   "usd": 0.999788
+  }
+ },
+ "billeteras": [
+  {
+   "red": "BTC",
+   "direccion": "bc1q0v428dnu8vr5d2q0tnsz0ppxgrcx96x8kdusly",
+   "etiqueta": "OrionX: billetera de retiros",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Pagó retiros de clientes hasta el 3-sep-2026.",
+   "explorer": "https://mempool.space/address/bc1q0v428dnu8vr5d2q0tnsz0ppxgrcx96x8kdusly",
+   "moneda": "BTC",
+   "saldo": 1.31790904,
+   "tokens": {},
+   "tx": 41477,
+   "ultima": "2026-09-03 16:48 UTC",
+   "valor_clp": 97155039.31666511,
+   "valor_usd": 103955.34716616
+  },
+  {
+   "red": "BTC",
+   "direccion": "bc1qvf2dukky4sqnc2w2w7p3vp457yyw0c7r8x8qfk",
+   "etiqueta": "OrionX: tesorería",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Bajó de 22,8 BTC (abr-2026) a 3,5 BTC (ago-2026).",
+   "explorer": "https://mempool.space/address/bc1qvf2dukky4sqnc2w2w7p3vp457yyw0c7r8x8qfk",
+   "moneda": "BTC",
+   "saldo": 3.50247384,
+   "tokens": {},
+   "tx": 327,
+   "ultima": "2026-08-31 14:15 UTC",
+   "valor_clp": 258199142.20391953,
+   "valor_usd": 276271.63402536
+  },
+  {
+   "red": "BTC",
+   "direccion": "bc1qhfjrk8e7f47jhy3x0rel74hselpm033xp2a4zm",
+   "etiqueta": "OrionX: consolidadora de depósitos",
+   "tipo": "orionx",
+   "vigilar": false,
+   "nota": "569 tx entre feb-2021 y abr-2026.",
+   "explorer": "https://mempool.space/address/bc1qhfjrk8e7f47jhy3x0rel74hselpm033xp2a4zm",
+   "moneda": "BTC",
+   "saldo": 0.0,
+   "tokens": {},
+   "tx": 569,
+   "ultima": "2026-04-08 13:29 UTC",
+   "valor_clp": 0,
+   "valor_usd": 0
+  },
+  {
+   "red": "BTC",
+   "direccion": "bc1qhvqwnj8phnt3dp2vjv6d8juv3yajxs0mwty4ah",
+   "etiqueta": "Destino de 18,4 BTC desde tesorería",
+   "tipo": "desvio",
+   "vigilar": true,
+   "nota": "Recibió 17,4 BTC el 25-may-2026 y 1,0 el 6-ago-2026. Sin mover.",
+   "explorer": "https://mempool.space/address/bc1qhvqwnj8phnt3dp2vjv6d8juv3yajxs0mwty4ah",
+   "moneda": "BTC",
+   "saldo": 18.4,
+   "tokens": {},
+   "tx": 2,
+   "ultima": "2026-08-06 15:57 UTC",
+   "valor_clp": 1356431035.1999998,
+   "valor_usd": 1451373.5999999999
+  },
+  {
+   "red": "BTC",
+   "direccion": "bc1qyejt6cth9dexy25nyevfscjd6jp0tf4u8qrxn7",
+   "etiqueta": "Destino de 1,118 BTC desde retiros",
+   "tipo": "desvio",
+   "vigilar": true,
+   "nota": "5 envíos entre el 23 y 31-ago-2026. Sin mover.",
+   "explorer": "https://mempool.space/address/bc1qyejt6cth9dexy25nyevfscjd6jp0tf4u8qrxn7",
+   "moneda": "BTC",
+   "saldo": 1.11787934,
+   "tokens": {},
+   "tx": 5,
+   "ultima": "2026-08-31 20:35 UTC",
+   "valor_clp": 82409034.26004852,
+   "valor_usd": 88177.20445986
+  },
+  {
+   "red": "BTC",
+   "direccion": "18AVbcmkSA5V6wtkM17bFH1nqQKEJcikC6",
+   "etiqueta": "Depósito en exchange (recibió 7,25 BTC)",
+   "tipo": "desvio",
+   "vigilar": false,
+   "nota": "Se barre hacia una billetera asociada a Binance.",
+   "explorer": "https://mempool.space/address/18AVbcmkSA5V6wtkM17bFH1nqQKEJcikC6",
+   "moneda": "BTC",
+   "saldo": 0.0,
+   "tokens": {},
+   "tx": 298,
+   "ultima": "2026-08-24 22:49 UTC",
+   "valor_clp": 0,
+   "valor_usd": 0
+  },
+  {
+   "red": "BTC",
+   "direccion": "3EKC5yWLJcM1Ykhz1PQpESjfn4MTAFdDFD",
+   "etiqueta": "Citada en la querella (71,5 BTC recibidos)",
+   "tipo": "querella",
+   "vigilar": false,
+   "nota": "Patrón de depósito en servicio custodial.",
+   "explorer": "https://mempool.space/address/3EKC5yWLJcM1Ykhz1PQpESjfn4MTAFdDFD",
+   "moneda": "BTC",
+   "saldo": 0.0,
+   "tokens": {},
+   "tx": 54,
+   "ultima": "2023-10-07 08:07 UTC",
+   "valor_clp": 0,
+   "valor_usd": 0
+  },
+  {
+   "red": "XRP",
+   "direccion": "rhQrkgoV4uza557mW6HbBWMtTDkB7u5yrs",
+   "etiqueta": "OrionX: cuenta XRP principal (verificada)",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Vaciada el 17-dic-2025: 581.958 XRP a rhPvt68Von…",
+   "explorer": "https://xrpscan.com/account/rhQrkgoV4uza557mW6HbBWMtTDkB7u5yrs",
+   "moneda": "XRP",
+   "saldo": 1.608082,
+   "tokens": {},
+   "tx": 6588,
+   "ultima": "2026-01-12 05:46 UTC",
+   "valor_clp": 2095.53989666,
+   "valor_usd": 2.23523398
+  },
+  {
+   "red": "XRP",
+   "direccion": "rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR",
+   "etiqueta": "OrionX: billetera caliente XRP",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Sigue recibiendo depósitos de clientes tras el cierre.",
+   "explorer": "https://xrpscan.com/account/rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR",
+   "moneda": "XRP",
+   "saldo": 3717.681131,
+   "tokens": {},
+   "tx": 61273520,
+   "ultima": "2026-09-07 12:01 UTC",
+   "valor_clp": 4844621.812240031,
+   "valor_usd": 5167.576772089999
+  },
+  {
+   "red": "XRP",
+   "direccion": "r98GhtACqw8uANemVEoBdCVrBjPzs7mCL5",
+   "etiqueta": "OrionX: origen de 579.944 XRP a Binance (2021)",
+   "tipo": "orionx",
+   "vigilar": false,
+   "nota": "Tag Binance 100764399. Prueba a Celsius en 2020.",
+   "explorer": "https://xrpscan.com/account/r98GhtACqw8uANemVEoBdCVrBjPzs7mCL5",
+   "moneda": "XRP",
+   "saldo": 1.069295,
+   "tokens": {},
+   "tx": 7,
+   "ultima": "2025-08-29 03:46 UTC",
+   "valor_clp": 1393.4303933500003,
+   "valor_usd": 1.48632005
+  },
+  {
+   "red": "XRP",
+   "direccion": "rhPvt68VonYujDsSkNsC6GX886BnXpwVnC",
+   "etiqueta": "Cuenta puente creada por OrionX (dic-2025)",
+   "tipo": "desvio",
+   "vigilar": true,
+   "nota": "Recibió 581.958 XRP y los pasó el 29-jul-2026 a rUqGoGp64X…",
+   "explorer": "https://xrpscan.com/account/rhPvt68VonYujDsSkNsC6GX886BnXpwVnC",
+   "moneda": "XRP",
+   "saldo": 1.000002,
+   "tokens": {},
+   "tx": 100943928,
+   "ultima": "2026-07-29 17:22 UTC",
+   "valor_clp": 1303.13260626,
+   "valor_usd": 1.3900027799999999
+  },
+  {
+   "red": "XRP",
+   "direccion": "rUqGoGp64XB58UccLNoKD38v4H5nxCiai2",
+   "etiqueta": "DESTINO ACTUAL de 581.957 XRP",
+   "tipo": "desvio",
+   "vigilar": true,
+   "nota": "Creada el 29-jul-2026. Los XRP siguen aquí. Si salen a un exchange, el tag identifica al titular.",
+   "explorer": "https://xrpscan.com/account/rUqGoGp64XB58UccLNoKD38v4H5nxCiai2",
+   "moneda": "XRP",
+   "saldo": 581957.1312,
+   "tokens": {},
+   "tx": 105935604,
+   "ultima": "2026-08-29 23:23 UTC",
+   "valor_clp": 758365796.380656,
+   "valor_usd": 808920.4123679999
+  },
+  {
+   "red": "TRX",
+   "direccion": "THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35",
+   "etiqueta": "OrionX: billetera caliente Tron / USDT",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Pagó retiros hasta el 3-sep-2026.",
+   "explorer": "https://tronscan.org/#/address/THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35",
+   "moneda": "TRX",
+   "saldo": 244108.994538,
+   "tokens": {
+    "USDT": 4145.903534
+   },
+   "tx": 137969,
+   "ultima": "2026-09-03 14:13 UTC",
+   "valor_clp": 80289728.99427445,
+   "valor_usd": 85910.79697692112
+  },
+  {
+   "red": "LTC",
+   "direccion": "ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2",
+   "etiqueta": "OrionX: billetera caliente Litecoin",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "12.280 tx, 39.647 LTC recibidos en total.",
+   "explorer": "https://litecoinspace.org/address/ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2",
+   "moneda": "LTC",
+   "saldo": 586.17569243,
+   "tokens": {},
+   "tx": 12280,
+   "ultima": "2026-08-31 22:53 UTC",
+   "valor_clp": 30239045.44538641,
+   "valor_usd": 32356.898222136002
+  },
+  {
+   "red": "ETH",
+   "direccion": "0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "etiqueta": "OrionX: billetera caliente EVM (Ethereum)",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "Misma dirección en Ethereum, BSC y Polygon. Fondeada por Binance Hot Wallet 12 en 2021.",
+   "explorer": "https://etherscan.io/address/0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "moneda": "ETH",
+   "saldo": 10.328089223338612,
+   "tokens": {
+    "USDT": 1650.497695
+   },
+   "tx": 21746,
+   "ultima": "21746 tx enviadas (nonce)",
+   "valor_clp": 25518758.21543168,
+   "valor_usd": 27305.12142026177
+  },
+  {
+   "red": "BSC",
+   "direccion": "0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "etiqueta": "OrionX: billetera caliente EVM (BSC)",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "46.073 tx. Última actividad 4-sep-2026.",
+   "explorer": "https://bscscan.com/address/0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "moneda": "BNB",
+   "saldo": 6.536616784241724,
+   "tokens": {
+    "USDT": 5008.493705433697
+   },
+   "tx": 46073,
+   "ultima": "46073 tx enviadas (nonce)",
+   "valor_clp": 9216150.347495131,
+   "valor_usd": 9861.262064074679
+  },
+  {
+   "red": "POLYGON",
+   "direccion": "0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "etiqueta": "OrionX: billetera caliente EVM (Polygon)",
+   "tipo": "orionx",
+   "vigilar": true,
+   "nota": "158.777 POL + USDT.",
+   "explorer": "https://polygonscan.com/address/0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2",
+   "moneda": "POL",
+   "saldo": 158777.1564879176,
+   "tokens": {
+    "USDT": 4658.302596
+   },
+   "tx": 3564,
+   "ultima": "3564 tx enviadas (nonce)",
+   "valor_clp": 18513959.36680785,
+   "valor_usd": 19810.53051958704
+  }
+ ],
+ "eventos": [],
+ "errores": [],
+ "total_clp": 2721187103.6458206,
+ "total_usd": 2909115.49555126
+}

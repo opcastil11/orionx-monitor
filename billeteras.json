@@ -1,0 +1,19 @@
+[
+  {"red":"BTC","direccion":"bc1q0v428dnu8vr5d2q0tnsz0ppxgrcx96x8kdusly","etiqueta":"OrionX: billetera de retiros","tipo":"orionx","vigilar":true,"nota":"Pagó retiros de clientes hasta el 3-sep-2026."},
+  {"red":"BTC","direccion":"bc1qvf2dukky4sqnc2w2w7p3vp457yyw0c7r8x8qfk","etiqueta":"OrionX: tesorería","tipo":"orionx","vigilar":true,"nota":"Bajó de 22,8 BTC (abr-2026) a 3,5 BTC (ago-2026)."},
+  {"red":"BTC","direccion":"bc1qhfjrk8e7f47jhy3x0rel74hselpm033xp2a4zm","etiqueta":"OrionX: consolidadora de depósitos","tipo":"orionx","vigilar":false,"nota":"569 tx entre feb-2021 y abr-2026."},
+  {"red":"BTC","direccion":"bc1qhvqwnj8phnt3dp2vjv6d8juv3yajxs0mwty4ah","etiqueta":"Destino de 18,4 BTC desde tesorería","tipo":"desvio","vigilar":true,"nota":"Recibió 17,4 BTC el 25-may-2026 y 1,0 el 6-ago-2026. Sin mover."},
+  {"red":"BTC","direccion":"bc1qyejt6cth9dexy25nyevfscjd6jp0tf4u8qrxn7","etiqueta":"Destino de 1,118 BTC desde retiros","tipo":"desvio","vigilar":true,"nota":"5 envíos entre el 23 y 31-ago-2026. Sin mover."},
+  {"red":"BTC","direccion":"18AVbcmkSA5V6wtkM17bFH1nqQKEJcikC6","etiqueta":"Depósito en exchange (recibió 7,25 BTC)","tipo":"desvio","vigilar":false,"nota":"Se barre hacia una billetera asociada a Binance."},
+  {"red":"BTC","direccion":"3EKC5yWLJcM1Ykhz1PQpESjfn4MTAFdDFD","etiqueta":"Citada en la querella (71,5 BTC recibidos)","tipo":"querella","vigilar":false,"nota":"Patrón de depósito en servicio custodial."},
+  {"red":"XRP","direccion":"rhQrkgoV4uza557mW6HbBWMtTDkB7u5yrs","etiqueta":"OrionX: cuenta XRP principal (verificada)","tipo":"orionx","vigilar":true,"nota":"Vaciada el 17-dic-2025: 581.958 XRP a rhPvt68Von…"},
+  {"red":"XRP","direccion":"rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR","etiqueta":"OrionX: billetera caliente XRP","tipo":"orionx","vigilar":true,"nota":"Sigue recibiendo depósitos de clientes tras el cierre."},
+  {"red":"XRP","direccion":"r98GhtACqw8uANemVEoBdCVrBjPzs7mCL5","etiqueta":"OrionX: origen de 579.944 XRP a Binance (2021)","tipo":"orionx","vigilar":false,"nota":"Tag Binance 100764399. Prueba a Celsius en 2020."},
+  {"red":"XRP","direccion":"rhPvt68VonYujDsSkNsC6GX886BnXpwVnC","etiqueta":"Cuenta puente creada por OrionX (dic-2025)","tipo":"desvio","vigilar":true,"nota":"Recibió 581.958 XRP y los pasó el 29-jul-2026 a rUqGoGp64X…"},
+  {"red":"XRP","direccion":"rUqGoGp64XB58UccLNoKD38v4H5nxCiai2","etiqueta":"DESTINO ACTUAL de 581.957 XRP","tipo":"desvio","vigilar":true,"nota":"Creada el 29-jul-2026. Los XRP siguen aquí. Si salen a un exchange, el tag identifica al titular."},
+  {"red":"TRX","direccion":"THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35","etiqueta":"OrionX: billetera caliente Tron / USDT","tipo":"orionx","vigilar":true,"nota":"Pagó retiros hasta el 3-sep-2026."},
+  {"red":"LTC","direccion":"ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2","etiqueta":"OrionX: billetera caliente Litecoin","tipo":"orionx","vigilar":true,"nota":"12.280 tx, 39.647 LTC recibidos en total."},
+  {"red":"ETH","direccion":"0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2","etiqueta":"OrionX: billetera caliente EVM (Ethereum)","tipo":"orionx","vigilar":true,"nota":"Misma dirección en Ethereum, BSC y Polygon. Fondeada por Binance Hot Wallet 12 en 2021."},
+  {"red":"BSC","direccion":"0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2","etiqueta":"OrionX: billetera caliente EVM (BSC)","tipo":"orionx","vigilar":true,"nota":"46.073 tx. Última actividad 4-sep-2026."},
+  {"red":"POLYGON","direccion":"0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2","etiqueta":"OrionX: billetera caliente EVM (Polygon)","tipo":"orionx","vigilar":true,"nota":"158.777 POL + USDT."}
+]

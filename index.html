@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor OrionX</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1a1d21;--mut:#5c6470;--line:#e2e5ea;--acc:#0b6e4f;--warn:#b45309;--bad:#b91c1c;--chip:#eef2f6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1216;--card:#171b21;--tx:#e6e8eb;--mut:#9aa3ad;--line:#2a313a;--acc:#4cc38a;--warn:#f59e0b;--bad:#f87171;--chip:#222a33}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:20px 20px 8px;max-width:1200px;margin:0 auto}h1{margin:0;font-size:22px}h1 small{font-weight:400;color:var(--mut);font-size:14px;margin-left:8px}
+.sub{color:var(--mut);margin-top:4px}main{max-width:1200px;margin:0 auto;padding:0 20px 40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}.card .k{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}.card .v{font-size:22px;font-weight:600;margin-top:4px}.card .d{color:var(--mut);font-size:12px;margin-top:2px}
+h2{font-size:16px;margin:22px 0 8px}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:900px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:12px;color:var(--mut);font-weight:600;background:var(--chip)}tr:last-child td{border-bottom:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.addr{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-all}.addr a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--mut)}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;background:var(--chip);color:var(--mut);margin-right:4px;white-space:nowrap}
+.chip.orionx{color:var(--acc);border:1px solid var(--acc)}.chip.desvio{color:var(--bad);border:1px solid var(--bad)}.chip.querella{color:var(--warn);border:1px solid var(--warn)}
+.eye{color:var(--warn);font-size:11px}
+.nota{color:var(--mut);font-size:12px}
+.ev{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 14px}.ev div{padding:7px 0;border-bottom:1px solid var(--line)}.ev div:last-child{border-bottom:0}.ev time{color:var(--mut);font-size:12px;margin-right:8px}
+.err{color:var(--bad);font-size:12px}footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.6}
+.pos{color:var(--acc)}.neg{color:var(--bad)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Monitor de billeteras OrionX <small>afectados por el cierre del 3 de septiembre de 2026</small></h1>
+  <div class="sub" id="act">Cargando datos…</div>
+</header>
+<main>
+  <div class="cards" id="cards"></div>
+  <h2>Billeteras vigiladas</h2>
+  <div class="wrap"><table id="tabla"><thead><tr><th>Red</th><th>Billetera</th><th>Qué es</th><th>Saldo</th><th>Valor CLP</th><th>Última actividad</th></tr></thead><tbody></tbody></table></div>
+  <h2>Movimientos detectados <span class="nota">(comparación entre chequeos; el más reciente primero)</span></h2>
+  <div class="ev" id="eventos"></div>
+  <footer>
+    Datos públicos de mempool.space, xrpscan.com, tronscan.org, blockcypher.com y nodos RPC públicos; precios de CoinGecko. Se actualiza cada hora con GitHub Actions.
+    Este monitor lo mantienen afectados de forma voluntaria y puede tener errores; cada dirección enlaza al explorador para verificarla. Las etiquetas de "desvío" son destinos de fondos que salieron de billeteras de OrionX; solo la Fiscalía puede establecer quién las controla.
+    Código, lista de billeteras e instrucciones para tener tu propia copia: <a id="repo" href="https://github.com/arigatodon/orionx-monitor" target="_blank" rel="noopener">github.com/arigatodon/orionx-monitor</a>.
+  </footer>
+</main>
+<script>
+const fmt=(n,d=6)=>n==null?'—':Number(n).toLocaleString('es-CL',{maximumFractionDigits:d});
+const clp=n=>n==null?'—':'$'+Math.round(n).toLocaleString('es-CL');
+fetch('data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  document.getElementById('act').textContent='Última actualización: '+d.actualizado+(d.errores?.length?` · ${d.errores.length} consulta(s) con error (se muestra el último dato conocido)`:'');
+  const or=d.billeteras.filter(b=>b.tipo==='orionx'),dv=d.billeteras.filter(b=>b.tipo==='desvio');
+  const sum=a=>a.reduce((s,b)=>s+(b.valor_clp||0),0);
+  const hoy=Date.now(),ev7=d.eventos.filter(e=>hoy-new Date(e.fecha.replace(' UTC','Z').replace(' ','T'))<7*864e5).length;
+  document.getElementById('cards').innerHTML=[
+    ['En billeteras de OrionX',clp(sum(or)),`${or.length} direcciones identificadas`],
+    ['En destinos de desvío',clp(sum(dv)),`${dv.length} direcciones a vigilar`],
+    ['Total localizable',clp(d.total_clp),'≈ US$'+Math.round(d.total_usd).toLocaleString('es-CL')],
+    ['Movimientos últimos 7 días',ev7,d.eventos.length?'último: '+d.eventos[0].fecha:'sin movimientos registrados']
+  ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]}</div></div>`).join('');
+  const tb=document.querySelector('#tabla tbody');
+  tb.innerHTML=d.billeteras.map(b=>{
+    const toks=Object.entries(b.tokens||{}).map(([k,v])=>`<div class="nota">${fmt(v,2)} ${k}</div>`).join('');
+    return `<tr><td><span class="chip ${b.tipo}">${b.red}</span></td>
+      <td class="addr"><a href="${b.explorer}" target="_blank" rel="noopener">${b.direccion}</a>${b.vigilar?'<div class="eye">● vigilancia prioritaria</div>':''}</td>
+      <td><b>${b.etiqueta}</b><div class="nota">${b.nota||''}</div>${b.error?`<div class="err">Error de consulta: ${b.error}</div>`:''}</td>
+      <td class="num">${fmt(b.saldo)} ${b.moneda}${toks}</td>
+      <td class="num">${clp(b.valor_clp)}</td>
+      <td class="nota">${b.ultima||'—'}</td></tr>`}).join('');
+  document.getElementById('eventos').innerHTML=d.eventos.length?d.eventos.map(e=>`<div><time>${e.fecha}</time><span class="chip">${e.red}</span><b>${e.etiqueta}</b> · ${e.detalle}</div>`).join(''):'<div class="nota">Ningún movimiento desde que empezó el monitor.</div>';
+}).catch(e=>{document.getElementById('act').textContent='No se pudo cargar data.json: '+e});
+</script>
+</body>
+</html>
