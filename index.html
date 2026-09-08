@@ -30,6 +30,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <header>
   <h1>Monitor de billeteras OrionX <small>afectados por el cierre del 3 de septiembre de 2026</small></h1>
   <div class="sub" id="act">Cargando datos…</div>
+  <div class="sub"><a href="historia.html">Ver la historia completa y el grafo de flujo de fondos →</a></div>
 </header>
 <main>
   <div class="cards" id="cards"></div>
@@ -44,6 +45,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   </footer>
 </main>
 <script>
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=(n,d=6)=>n==null?'—':Number(n).toLocaleString('es-CL',{maximumFractionDigits:d});
 const clp=n=>n==null?'—':'$'+Math.round(n).toLocaleString('es-CL');
 fetch('data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
@@ -55,18 +57,19 @@ fetch('data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
     ['En billeteras de OrionX',clp(sum(or)),`${or.length} direcciones identificadas`],
     ['En destinos de desvío',clp(sum(dv)),`${dv.length} direcciones a vigilar`],
     ['Total localizable',clp(d.total_clp),'≈ US$'+Math.round(d.total_usd).toLocaleString('es-CL')],
-    ['Movimientos últimos 7 días',ev7,d.eventos.length?'último: '+d.eventos[0].fecha:'sin movimientos registrados']
+    ['Movimientos últimos 7 días',ev7,d.eventos.length?'último: '+esc(d.eventos[0].fecha):'sin movimientos registrados']
   ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]}</div></div>`).join('');
   const tb=document.querySelector('#tabla tbody');
   tb.innerHTML=d.billeteras.map(b=>{
-    const toks=Object.entries(b.tokens||{}).map(([k,v])=>`<div class="nota">${fmt(v,2)} ${k}</div>`).join('');
-    return `<tr><td><span class="chip ${b.tipo}">${b.red}</span></td>
-      <td class="addr"><a href="${b.explorer}" target="_blank" rel="noopener">${b.direccion}</a>${b.vigilar?'<div class="eye">● vigilancia prioritaria</div>':''}</td>
-      <td><b>${b.etiqueta}</b><div class="nota">${b.nota||''}</div>${b.error?`<div class="err">Error de consulta: ${b.error}</div>`:''}</td>
-      <td class="num">${fmt(b.saldo)} ${b.moneda}${toks}</td>
+    const toks=Object.entries(b.tokens||{}).map(([k,v])=>`<div class="nota">${fmt(v,2)} ${esc(k)}</div>`).join('');
+    const url=/^https:\/\//.test(b.explorer||'')?b.explorer:'#';
+    return `<tr><td><span class="chip ${b.tipo==='desvio'?'desvio':b.tipo==='querella'?'querella':'orionx'}">${esc(b.red)}</span></td>
+      <td class="addr"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(b.direccion)}</a>${b.vigilar?'<div class="eye">● vigilancia prioritaria</div>':''}</td>
+      <td><b>${esc(b.etiqueta)}</b><div class="nota">${esc(b.nota||'')}</div>${b.error?`<div class="err">Error de consulta: ${esc(b.error)}</div>`:''}</td>
+      <td class="num">${fmt(b.saldo)} ${esc(b.moneda)}${toks}</td>
       <td class="num">${clp(b.valor_clp)}</td>
       <td class="nota">${b.ultima||'—'}</td></tr>`}).join('');
-  document.getElementById('eventos').innerHTML=d.eventos.length?d.eventos.map(e=>`<div><time>${e.fecha}</time><span class="chip">${e.red}</span><b>${e.etiqueta}</b> · ${e.detalle}</div>`).join(''):'<div class="nota">Ningún movimiento desde que empezó el monitor.</div>';
+  document.getElementById('eventos').innerHTML=d.eventos.length?d.eventos.map(e=>`<div><time>${esc(e.fecha)}</time><span class="chip">${esc(e.red)}</span><b>${esc(e.etiqueta)}</b> · ${esc(e.detalle)}</div>`).join(''):'<div class="nota">Ningún movimiento desde que empezó el monitor.</div>';
 }).catch(e=>{document.getElementById('act').textContent='No se pudo cargar data.json: '+e});
 </script>
 </body>

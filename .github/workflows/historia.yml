@@ -1,0 +1,28 @@
+name: historia
+on:
+  schedule:
+    - cron: "20 5 * * *"     # una vez al día; la primera corrida es la larga, después solo baja lo nuevo
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: historia
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Bajar historia nueva
+        env:
+          ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}   # opcional; sin ella se salta BSC
+          TRONGRID_KEY: ${{ secrets.TRONGRID_KEY }}     # opcional; solo sube el límite de peticiones
+        run: python3 -u fetch_historia.py
+      - name: Guardar
+        run: |
+          git config user.name "monitor-bot"
+          git config user.email "monitor-bot@users.noreply.github.com"
+          git add historia
+          git diff --cached --quiet || git commit -m "historia: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
