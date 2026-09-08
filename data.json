@@ -1,37 +1,37 @@
 {
- "actualizado": "2026-09-08 08:48 UTC",
+ "actualizado": "2026-09-08 13:29 UTC",
  "precios": {
   "BTC": {
-   "clp": 73391325,
-   "usd": 78529
+   "clp": 72591422,
+   "usd": 78332
   },
   "XRP": {
-   "clp": 1300.7,
-   "usd": 1.39
+   "clp": 1296.83,
+   "usd": 1.4
   },
   "TRX": {
-   "clp": 315.82,
-   "usd": 0.337928
+   "clp": 314.16,
+   "usd": 0.339004
   },
   "LTC": {
-   "clp": 51913,
-   "usd": 55.55
+   "clp": 51236,
+   "usd": 55.29
   },
   "ETH": {
-   "clp": 2319228,
-   "usd": 2481.57
+   "clp": 2288615,
+   "usd": 2469.61
   },
   "BNB": {
-   "clp": 707839,
-   "usd": 757.39
+   "clp": 695938,
+   "usd": 750.98
   },
   "POL": {
-   "clp": 89.71,
-   "usd": 0.095993
+   "clp": 89.2,
+   "usd": 0.096253
   },
   "USDT": {
-   "clp": 934.36,
-   "usd": 0.999767
+   "clp": 926.3,
+   "usd": 0.99956
   }
  },
  "billeteras": [
@@ -48,8 +48,8 @@
    "tokens": {},
    "tx": 41477,
    "ultima": "2026-09-03 16:48 UTC",
-   "valor_clp": 96723090.675078,
-   "valor_usd": 103494.07900216
+   "valor_clp": 95668891.28025489,
+   "valor_usd": 103234.45092128
   },
   {
    "red": "BTC",
@@ -64,8 +64,8 @@
    "tokens": {},
    "tx": 327,
    "ultima": "2026-08-31 14:15 UTC",
-   "valor_clp": 257051195.895438,
-   "valor_usd": 275045.76818136
+   "valor_clp": 254249556.56340048,
+   "valor_usd": 274355.78083488
   },
   {
    "red": "BTC",
@@ -96,8 +96,8 @@
    "tokens": {},
    "tx": 2,
    "ultima": "2026-08-06 15:57 UTC",
-   "valor_clp": 1350400380.0,
-   "valor_usd": 1444933.5999999999
+   "valor_clp": 1335682164.8,
+   "valor_usd": 1441308.7999999998
   },
   {
    "red": "BTC",
@@ -112,8 +112,8 @@
    "tokens": {},
    "tx": 5,
    "ultima": "2026-08-31 20:35 UTC",
-   "valor_clp": 82042645.9527255,
-   "valor_usd": 87785.94669086
+   "valor_clp": 81148450.91502148,
+   "valor_usd": 87565.72446088
   },
   {
    "red": "BTC",
@@ -160,8 +160,8 @@
    "tokens": {},
    "tx": 6588,
    "ultima": "2026-01-12 05:46 UTC",
-   "valor_clp": 2091.6322574,
-   "valor_usd": 2.23523398
+   "valor_clp": 2085.40898006,
+   "valor_usd": 2.2513148
   },
   {
    "red": "XRP",
@@ -172,12 +172,12 @@
    "nota": "Sigue recibiendo depósitos de clientes tras el cierre.",
    "explorer": "https://xrpscan.com/account/rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR",
    "moneda": "XRP",
-   "saldo": 3717.681131,
+   "saldo": 3717.681133,
    "tokens": {},
    "tx": 61273520,
-   "ultima": "2026-09-07 12:01 UTC",
-   "valor_clp": 4835587.8470917,
-   "valor_usd": 5167.576772089999
+   "ultima": "2026-09-08 12:02 UTC",
+   "valor_clp": 4821200.4237083895,
+   "valor_usd": 5204.7535861999995
   },
   {
    "red": "XRP",
@@ -192,8 +192,8 @@
    "tokens": {},
    "tx": 7,
    "ultima": "2025-08-29 03:46 UTC",
-   "valor_clp": 1390.8320065000003,
-   "valor_usd": 1.48632005
+   "valor_clp": 1386.69383485,
+   "valor_usd": 1.4970130000000001
   },
   {
    "red": "XRP",
@@ -208,8 +208,8 @@
    "tokens": {},
    "tx": 100943928,
    "ultima": "2026-07-29 17:22 UTC",
-   "valor_clp": 1300.7026014,
-   "valor_usd": 1.3900027799999999
+   "valor_clp": 1296.83259366,
+   "valor_usd": 1.4000028
   },
   {
    "red": "XRP",
@@ -224,8 +224,8 @@
    "tokens": {},
    "tx": 105935604,
    "ultima": "2026-08-29 23:23 UTC",
-   "valor_clp": 756951640.55184,
-   "valor_usd": 808920.4123679999
+   "valor_clp": 754699466.4540958,
+   "valor_usd": 814739.9836799998
   },
   {
    "red": "TRX",
@@ -236,14 +236,14 @@
    "nota": "Pagó retiros hasta el 3-sep-2026.",
    "explorer": "https://tronscan.org/#/address/THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35",
    "moneda": "TRX",
-   "saldo": 244108.994538,
+   "saldo": 244108.994539,
    "tokens": {
     "USDT": 4145.903534
    },
-   "tx": 137969,
-   "ultima": "2026-09-03 14:13 UTC",
-   "valor_clp": 80968269.0810194,
-   "valor_usd": 86636.20184471384
+   "tx": 137970,
+   "ultima": "2026-09-08 12:01 UTC",
+   "valor_clp": 80529632.16791645,
+   "valor_usd": 86898.0049211442
   },
   {
    "red": "LTC",
@@ -258,8 +258,8 @@
    "tokens": {},
    "tx": 12280,
    "ultima": "2026-08-31 22:53 UTC",
-   "valor_clp": 30430138.72111859,
-   "valor_usd": 32562.0597144865
+   "valor_clp": 30033297.77734348,
+   "valor_usd": 32409.6540344547
   },
   {
    "red": "ETH",
@@ -276,8 +276,8 @@
    },
    "tx": 21746,
    "ultima": "21746 tx enviadas (nonce)",
-   "valor_clp": 25495352.73956536,
-   "valor_usd": 27279.989502997465
+   "valor_clp": 25165875.9327496,
+   "valor_usd": 27156.12390286347
   },
   {
    "red": "BSC",
@@ -294,8 +294,8 @@
    },
    "tx": 46073,
    "ultima": "46073 tx enviadas (nonce)",
-   "valor_clp": 9306608.466549907,
-   "valor_usd": 9958.094912617169
+   "valor_clp": 9188447.73093485,
+   "valor_usd": 9915.158440833156
   },
   {
    "red": "POLYGON",
@@ -312,12 +312,31 @@
    },
    "tx": 3564,
    "ultima": "3564 tx enviadas (nonce)",
-   "valor_clp": 18596430.322129644,
-   "valor_usd": 19898.712794239804
+   "valor_clp": 18477908.05339705,
+   "valor_usd": 19939.030586289293
   }
  ],
- "eventos": [],
+ "eventos": [
+  {
+   "fecha": "2026-09-08 13:29 UTC",
+   "red": "TRX",
+   "direccion": "THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35",
+   "etiqueta": "OrionX: billetera caliente Tron / USDT",
+   "detalle": "+0.000001 TRX (saldo 244,108.994539)",
+   "saldo_antes": 244108.994538,
+   "saldo_despues": 244108.994539
+  },
+  {
+   "fecha": "2026-09-08 13:29 UTC",
+   "red": "XRP",
+   "direccion": "rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR",
+   "etiqueta": "OrionX: billetera caliente XRP",
+   "detalle": "+0.000002 XRP (saldo 3,717.681133)",
+   "saldo_antes": 3717.681131,
+   "saldo_despues": 3717.681133
+  }
+ ],
  "errores": [],
- "total_clp": 2712806123.419421,
- "total_usd": 2901687.5533403344
+ "total_clp": 2689669661.034231,
+ "total_usd": 2902732.6136994245
 }
