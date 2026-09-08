@@ -1,0 +1,86 @@
+{
+ "BTC_bc1q0v428dnu8vr5d2q0tnsz0ppxgrcx96x8kdusly": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 41477,
+  "actualizado": "2026-09-08 18:40 UTC"
+ },
+ "BTC_bc1qvf2dukky4sqnc2w2w7p3vp457yyw0c7r8x8qfk": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 327,
+  "actualizado": "2026-09-08 18:40 UTC"
+ },
+ "BTC_bc1qhfjrk8e7f47jhy3x0rel74hselpm033xp2a4zm": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 569,
+  "actualizado": "2026-09-08 18:41 UTC"
+ },
+ "BTC_bc1qhvqwnj8phnt3dp2vjv6d8juv3yajxs0mwty4ah": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 2,
+  "actualizado": "2026-09-08 18:41 UTC"
+ },
+ "BTC_bc1qyejt6cth9dexy25nyevfscjd6jp0tf4u8qrxn7": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 5,
+  "actualizado": "2026-09-08 18:41 UTC"
+ },
+ "BTC_18AVbcmkSA5V6wtkM17bFH1nqQKEJcikC6": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 298,
+  "actualizado": "2026-09-08 18:42 UTC"
+ },
+ "BTC_3EKC5yWLJcM1Ykhz1PQpESjfn4MTAFdDFD": {
+  "pendiente": null,
+  "completo": true,
+  "tx": 54,
+  "actualizado": "2026-09-08 18:42 UTC"
+ },
+ "XRP_rhQrkgoV4uza557mW6HbBWMtTDkB7u5yrs": {
+  "ledger": -1,
+  "marker": null,
+  "tx": 14312,
+  "actualizado": "2026-09-08 18:43 UTC"
+ },
+ "XRP_rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR": {
+  "ledger": -1,
+  "marker": null,
+  "tx": 19117,
+  "actualizado": "2026-09-08 18:48 UTC"
+ },
+ "XRP_r98GhtACqw8uANemVEoBdCVrBjPzs7mCL5": {
+  "ledger": -1,
+  "marker": null,
+  "tx": 26,
+  "actualizado": "2026-09-08 18:48 UTC"
+ },
+ "XRP_rhPvt68VonYujDsSkNsC6GX886BnXpwVnC": {
+  "ledger": -1,
+  "marker": null,
+  "tx": 10,
+  "actualizado": "2026-09-08 18:48 UTC"
+ },
+ "XRP_rUqGoGp64XB58UccLNoKD38v4H5nxCiai2": {
+  "ledger": -1,
+  "marker": null,
+  "tx": 8,
+  "actualizado": "2026-09-08 18:48 UTC"
+ },
+ "TRX_THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35": {
+  "ts_transactions": 1788868884000,
+  "tx": 143515,
+  "actualizado": "2026-09-08 19:22 UTC",
+  "ts_transactions_trc20": 1788190212000
+ },
+ "LTC_ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2": {
+  "pendiente": "9a8898e30bb94b9a8f86e7f1509f1e6ce9db24cda399facfe6131c2ec3d293e6",
+  "completo": 0,
+  "tx": 9475,
+  "actualizado": "2026-09-08 19:40 UTC"
+ }
+}
