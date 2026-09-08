@@ -1,1 +1,5 @@
 __pycache__/
+# La evidencia cruda y los movimientos normalizados pesan cientos de MB y se
+# vuelven a bajar solos: en el repo van solo los JSON que consume la página.
+historia/raw/
+historia/mov/
