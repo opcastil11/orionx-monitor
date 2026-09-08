@@ -355,12 +355,134 @@ def construir_grafo(wallets):
     (HIST / "grafo.json").write_text(json.dumps(g, ensure_ascii=False), encoding="utf-8")
     return g
 
+
+# ---------------------------------------------------------------- series, saldos y destinos
+HITO_MIN = {"BTC": 0.5, "LTC": 50, "XRP": 10000, "TRX": 50000, "ETH": 1, "BNB": 5, "POL": 20000, "USDT": 10000}
+
+def _saldos_hoy():
+    """saldo actual de cada billetera vigilada, tal como lo dejó monitor.py en data.json"""
+    f = HERE / "data.json"
+    if not f.exists(): return {}, {}, None
+    d = json.loads(f.read_text(encoding="utf-8"))
+    out = {}
+    for b in d.get("billeteras", []):
+        s = {b.get("moneda"): b.get("saldo") or 0}
+        for k, v in (b.get("tokens") or {}).items():
+            if k != "pendiente": s[k] = v
+        out[f"{b['red']}:{b['direccion'].lower()}"] = s
+    return out, d.get("precios", {}), d.get("actualizado")
+
+def construir_series(wallets):
+    """Reconstruye el saldo de cada dirección a lo largo del tiempo: se parte del saldo de hoy y se
+    deshacen los movimientos hacia atrás. Deja historia/series.json para la línea de tiempo y los saldos."""
+    saldos, precios, cuando = _saldos_hoy()
+    fuera = []
+    for w in wallets:
+        red, a = w["red"], w["direccion"]; yo = f"{red}:{a.lower()}"
+        f = MOV / f"{slug(red, a)}.jsonl"
+        if not f.exists(): continue
+        movs = []
+        for l in f.read_text(encoding="utf-8").splitlines():
+            if not l.strip(): continue
+            try: m = json.loads(l)
+            except json.JSONDecodeError: continue
+            if m["sentido"] in ("in", "out") and m["ts"]: movs.append(m)
+        movs.sort(key=lambda m: m["ts"])
+        por_moneda = defaultdict(list)
+        for m in movs: por_moneda[m["moneda"]].append(m)
+        series, recibido, enviado, picos = {}, {}, {}, {}
+        for moneda, ms in por_moneda.items():
+            recibido[moneda] = round(sum(m["monto"] for m in ms if m["sentido"] == "in"), 8)
+            enviado[moneda] = round(sum(m["monto"] for m in ms if m["sentido"] == "out"), 8)
+            hoy = (saldos.get(yo) or {}).get(moneda)
+            neto_total = recibido[moneda] - enviado[moneda]
+            base = (hoy if hoy is not None else neto_total) - neto_total   # saldo antes del primer movimiento (≈0)
+            cum, serie = base, [[ms[0]["ts"] - 86400, round(base, 8)]]
+            for m in ms:
+                cum += m["monto"] if m["sentido"] == "in" else -m["monto"]
+                if serie and serie[-1][0] == m["ts"]: serie[-1][1] = round(cum, 8)
+                else: serie.append([m["ts"], round(cum, 8)])
+            if len(serie) > 4000:                                          # una muestra por día basta para dibujar
+                comp, ult = [], None
+                for t, v in serie:
+                    d = t // 86400
+                    if d != ult: comp.append([t, v]); ult = d
+                    else: comp[-1] = [t, v]
+                serie = comp
+            series[moneda] = serie
+            pico = max(serie, key=lambda x: x[1])
+            picos[moneda] = {"monto": pico[1], "fecha": iso(pico[0])}
+        umbral = {k: HITO_MIN.get(k, 0) for k in por_moneda}
+        hitos = sorted([m for m in movs if m["monto"] >= umbral.get(m["moneda"], 0)], key=lambda m: -m["monto"])[:400]
+        fuera.append({"id": yo, "red": red, "dir": a, "etiqueta": w["etiqueta"], "tipo": w["tipo"],
+                      "vigilar": w.get("vigilar", False), "nota": w.get("nota", ""),
+                      "saldo_hoy": saldos.get(yo) or {}, "recibido": recibido, "enviado": enviado,
+                      "picos": picos, "series": series, "n": len(movs),
+                      "primera": iso(movs[0]["ts"]) if movs else None, "ultima": iso(movs[-1]["ts"]) if movs else None,
+                      "hitos": sorted(hitos, key=lambda m: m["ts"])})
+    datos = {"generado": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+             "saldos_de": cuando, "precios": precios, "billeteras": fuera}
+    (HIST / "series.json").write_text(json.dumps(datos, ensure_ascii=False), encoding="utf-8")
+    return datos
+
+def construir_destinos(wallets, top=40, consultar_saldos=True):
+    """A dónde salió la plata de las billeteras de OrionX y qué queda hoy en esos destinos.
+    El saldo de cada destino se consulta con el mismo código de monitor.py."""
+    conocidas = {(w["red"], w["direccion"].lower()): w for w in wallets}
+    agg = defaultdict(lambda: {"monto": defaultdict(float), "n": 0, "primera": None, "ultima": None, "desde": set()})
+    for w in wallets:
+        if w["tipo"] != "orionx": continue
+        red, a = w["red"], w["direccion"]
+        f = MOV / f"{slug(red, a)}.jsonl"
+        if not f.exists(): continue
+        for l in f.read_text(encoding="utf-8").splitlines():
+            if not l.strip(): continue
+            try: m = json.loads(l)
+            except json.JSONDecodeError: continue
+            if m["sentido"] != "out" or not m.get("contra"): continue
+            if (red, m["contra"].lower()) in conocidas and conocidas[(red, m["contra"].lower())]["tipo"] == "orionx":
+                continue                                    # movimientos entre billeteras de la propia OrionX
+            d = agg[(red, m["contra"])]
+            d["monto"][m["moneda"]] += m["monto"]; d["n"] += 1; d["desde"].add(w["etiqueta"])
+            for c, cmp_ in (("primera", min), ("ultima", max)):
+                d[c] = m["fecha"] if d[c] is None else cmp_(d[c], m["fecha"])
+    filas = []
+    for (red, dirn), v in agg.items():
+        k = conocidas.get((red, dirn.lower()))
+        filas.append({"red": red, "dir": dirn, "recibido": {m: round(x, 8) for m, x in v["monto"].items()},
+                      "n": v["n"], "primera": v["primera"], "ultima": v["ultima"], "desde": sorted(v["desde"]),
+                      "etiqueta": k["etiqueta"] if k else "", "tipo": k["tipo"] if k else "externa",
+                      "nota": k.get("nota", "") if k else "", "vigilada": bool(k)})
+    orden = {"BTC": 1, "LTC": 1e-3, "ETH": 1, "BNB": 1e-2, "POL": 1e-6, "XRP": 1e-5, "TRX": 1e-6, "USDT": 1e-5}
+    filas.sort(key=lambda f: -sum(v * orden.get(m, 1e-6) for m, v in f["recibido"].items()))
+    if consultar_saldos:
+        import monitor                                       # reutiliza el consultor de saldos del monitor horario
+        for f in filas[:top]:
+            try:
+                r = monitor.consultar({"red": f["red"], "direccion": f["dir"]})
+                f["saldo_hoy"] = {monitor.NATIVO[f["red"]]: r.get("saldo"), **{k: v for k, v in (r.get("tokens") or {}).items() if k != "pendiente"}}
+                f["tx"] = r.get("tx"); f["ultima_actividad"] = r.get("ultima")
+            except Exception as e:
+                f["error"] = str(e)[:120]
+            print(f"    saldo destino {f['red']} {f['dir'][:14]}… {f.get('saldo_hoy')}", flush=True)
+            time.sleep(0.6)
+    resto = filas[300:]                                      # el archivo se queda con los 300 mayores + un resumen
+    resumen = {"n_direcciones": len(resto), "n_tx": sum(f["n"] for f in resto), "monto": defaultdict(float)}
+    for f in resto:
+        for m, v in f["recibido"].items(): resumen["monto"][m] += v
+    resumen["monto"] = {m: round(v, 8) for m, v in resumen["monto"].items()}
+    datos = {"generado": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+             "destinos": filas[:300], "resto": resumen, "total_destinos": len(filas)}
+    (HIST / "destinos.json").write_text(json.dumps(datos, ensure_ascii=False), encoding="utf-8")
+    return datos
+
 # ---------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--red"); ap.add_argument("--dir"); ap.add_argument("--max-tx", type=int, default=0)
     ap.add_argument("--rehacer", action="store_true", help="ignora lo ya bajado y empieza de cero")
     ap.add_argument("--solo-grafo", action="store_true")
+    ap.add_argument("--sin-destinos", action="store_true", help="no consulta el saldo actual de los destinos")
     a = ap.parse_args()
     wallets = json.loads((HERE / "billeteras.json").read_text(encoding="utf-8"))
     HIST.mkdir(exist_ok=True); RAW.mkdir(exist_ok=True); MOV.mkdir(exist_ok=True)
@@ -393,6 +515,10 @@ def main():
         print(f"descarga en {time.time()-t0:.0f}s", flush=True)
     g = construir_grafo(wallets)
     print(f"grafo: {len(g['nodos'])} nodos, {len(g['aristas'])} aristas -> historia/grafo.json")
+    se = construir_series(wallets)
+    print(f"series: {len(se['billeteras'])} billeteras -> historia/series.json")
+    de = construir_destinos(wallets, consultar_saldos=not a.sin_destinos)
+    print(f"destinos: {len(de['destinos'])} contrapartes -> historia/destinos.json")
 
 if __name__ == "__main__":
     main()

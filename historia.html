@@ -8,153 +8,350 @@
 :root{--bg:#f6f7f9;--card:#fff;--tx:#1a1d21;--mut:#5c6470;--line:#e2e5ea;--acc:#0b6e4f;--warn:#b45309;--bad:#b91c1c;--chip:#eef2f6;--ext:#7b8794}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1216;--card:#171b21;--tx:#e6e8eb;--mut:#9aa3ad;--line:#2a313a;--acc:#4cc38a;--warn:#f59e0b;--bad:#f87171;--chip:#222a33;--ext:#8b97a5}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:16px 20px 6px;max-width:1500px;margin:0 auto}h1{margin:0;font-size:20px}h1 small{font-weight:400;color:var(--mut);font-size:13px;margin-left:8px}
+header{padding:16px 20px 0;max-width:1500px;margin:0 auto}h1{margin:0;font-size:20px}h1 small{font-weight:400;color:var(--mut);font-size:13px;margin-left:8px}
 .sub{color:var(--mut);margin-top:3px;font-size:13px}main{max-width:1500px;margin:0 auto;padding:0 20px 30px}
-.barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 8px}
+nav{display:flex;gap:4px;margin:14px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);font:inherit;font-size:14px;padding:8px 12px;cursor:pointer}
+nav button.on{color:var(--tx);border-bottom-color:var(--acc);font-weight:600}
+section{display:none;padding-top:14px}section.on{display:block}
+.barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
 .f{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--line);cursor:pointer;font-size:12px;user-select:none}
-.f.off{opacity:.38}.f input{display:none}
+.f.off{opacity:.38}.f.on{border-color:var(--acc);color:var(--acc)}
 input[type=search],select{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:5px 9px;font:inherit;font-size:13px}
-.split{display:grid;grid-template-columns:1fr 380px;gap:12px}@media(max-width:1000px){.split{grid-template-columns:1fr}}
-.caja{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-#grafo{width:100%;height:70vh;min-height:420px;display:block;cursor:grab}#grafo:active{cursor:grabbing}
+.caja{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.card .k{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.card .v{font-size:20px;font-weight:600;margin-top:3px}.card .d{color:var(--mut);font-size:12px;margin-top:2px}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;color:var(--mut);font-weight:600;background:var(--chip);position:sticky;top:0;cursor:pointer;white-space:nowrap}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.addr{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;background:var(--chip);color:var(--mut);margin-right:4px;white-space:nowrap}
+.chip.orionx{color:var(--acc);border:1px solid var(--acc)}.chip.desvio{color:var(--bad);border:1px solid var(--bad)}
+.chip.querella{color:var(--warn);border:1px solid var(--warn)}.chip.externa{color:var(--ext);border:1px solid var(--ext)}
+.pos{color:var(--acc)}.neg{color:var(--bad)}.nota{color:var(--mut);font-size:12px}
+.mini{height:8px;background:var(--chip);border-radius:4px;overflow:hidden;min-width:80px}.mini i{display:block;height:100%;background:var(--acc)}
+#lienzo,#carriles,#grafo{width:100%;display:block}#lienzo{height:330px}#carriles{height:260px}#grafo{height:70vh;min-height:420px;cursor:grab}
+.eje text{font-size:10px;fill:var(--mut)}.eje line,.eje path{stroke:var(--line)}
+.guia{stroke:var(--mut);stroke-dasharray:2 3}.hito line{stroke:var(--warn);stroke-dasharray:4 3;opacity:.7}.hito text{font-size:10px;fill:var(--warn)}
 .nodo circle{stroke:var(--card);stroke-width:1.5px;cursor:pointer}.nodo text{font-size:10px;fill:var(--mut);pointer-events:none}
-.nodo.sel circle{stroke:var(--tx);stroke-width:2.5px}
-.arista{fill:none;stroke:var(--mut);stroke-opacity:.45}.arista.res{stroke-dasharray:3 3;stroke-opacity:.3}
+.nodo.sel circle{stroke:var(--tx);stroke-width:2.5px}.arista{fill:none;stroke:var(--mut);stroke-opacity:.45}.arista.res{stroke-dasharray:3 3;stroke-opacity:.3}
+.split{display:grid;grid-template-columns:1fr 380px;gap:12px}@media(max-width:1000px){.split{grid-template-columns:1fr}}
 .panel{padding:14px;max-height:70vh;overflow:auto}.panel h3{margin:0 0 2px;font-size:15px}
-.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;background:var(--chip);color:var(--mut);margin-right:4px}
-.chip.orionx{color:var(--acc);border:1px solid var(--acc)}.chip.desvio{color:var(--bad);border:1px solid var(--bad)}.chip.querella{color:var(--warn);border:1px solid var(--warn)}.chip.externa{color:var(--ext);border:1px solid var(--ext)}
-.addr{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;margin:6px 0}
-.nota{color:var(--mut);font-size:12px}.tot{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0}
-.tot div span{display:block;font-size:11px;color:var(--mut)}.pos{color:var(--acc)}.neg{color:var(--bad)}
-table{border-collapse:collapse;width:100%;font-size:12px;margin-top:6px}td,th{padding:4px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{color:var(--mut);font-weight:600;position:sticky;top:0;background:var(--card)}td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.leyenda{color:var(--mut);font-size:12px;margin-top:8px;line-height:1.6}
-footer{color:var(--mut);font-size:12px;margin-top:20px;line-height:1.6}
-a{color:inherit}
+#tip{position:fixed;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 6px 20px #0003;display:none;z-index:9;max-width:320px}
+footer{color:var(--mut);font-size:12px;margin-top:22px;line-height:1.6}
+a{color:inherit}code{font-size:12px}
 </style>
 </head>
 <body>
 <header>
-  <h1>Flujo de fondos <small>historia completa de las billeteras vigiladas · <a href="index.html">volver al monitor</a></small></h1>
-  <div class="sub" id="est">Cargando historia/grafo.json…</div>
+  <h1>Historia de los fondos <small>reconstruida transacción por transacción · <a href="index.html">volver al monitor</a></small></h1>
+  <div class="sub" id="est">Cargando…</div>
+  <nav id="tabs">
+    <button data-t="linea" class="on">Línea de tiempo</button>
+    <button data-t="saldos">Saldos por billetera</button>
+    <button data-t="donde">¿Dónde están los fondos?</button>
+    <button data-t="grafo">Grafo</button>
+  </nav>
 </header>
 <main>
-  <div class="barra" id="filtros"></div>
-  <div class="split">
-    <div class="caja"><svg id="grafo"></svg></div>
-    <div class="caja panel" id="panel"><div class="nota">Haz clic en un círculo para ver la dirección, sus totales y sus movimientos. Arrastra para mover, rueda para acercar.</div></div>
-  </div>
-  <div class="leyenda" id="leyenda"></div>
+  <section id="s-linea" class="on">
+    <div class="barra" id="fmonedas"></div>
+    <div class="caja" style="padding:6px 4px 0"><svg id="lienzo"></svg></div>
+    <div class="nota" style="margin:6px 2px">Arrastra sobre el gráfico para acercar un período; doble clic vuelve a todo. El área apilada es el saldo reconstruido: se parte del saldo de hoy y se deshacen los movimientos hacia atrás.</div>
+    <div class="caja" style="padding:6px 4px 0;margin-top:8px"><svg id="carriles"></svg></div>
+    <div class="nota" style="margin:6px 2px">Cada punto es un movimiento grande: verde entra, rojo sale, el tamaño crece con el monto. Clic para abrir la transacción en el explorador.</div>
+  </section>
+
+  <section id="s-saldos">
+    <div class="cards" id="csaldos"></div>
+    <div class="caja wrap"><table id="tsaldos"></table></div>
+    <div class="nota" style="margin-top:8px">El pico es el saldo máximo que tuvo esa dirección según su propia historia; la diferencia con el saldo de hoy es lo que salió.</div>
+  </section>
+
+  <section id="s-donde">
+    <div class="cards" id="cdonde"></div>
+    <div class="barra" id="fdonde"></div>
+    <div class="caja wrap"><table id="tdonde"></table></div>
+    <div class="nota" style="margin-top:8px" id="ndonde"></div>
+  </section>
+
+  <section id="s-grafo">
+    <div class="barra" id="filtros"></div>
+    <div class="split">
+      <div class="caja"><svg id="grafo"></svg></div>
+      <div class="caja panel" id="panel"><div class="nota">Haz clic en un círculo para ver la dirección, sus totales y sus movimientos.</div></div>
+    </div>
+    <div class="nota" id="leyenda" style="margin-top:8px"></div>
+  </section>
+
   <footer>
-    Cada flecha va del que envía al que recibe y su grosor crece con el monto acumulado. Las contrapartes menores de cada dirección se agrupan en un nodo punteado
-    para que el dibujo siga siendo legible; la historia íntegra, transacción por transacción, está en <code>historia/mov/</code> y el crudo del explorador en <code>historia/raw/</code>.
-    El reparto de montos entre varias contrapartes de una misma transacción de Bitcoin o Litecoin usa la convención proporcional habitual y es una aproximación: verifica en el explorador antes de afirmar nada.
+    Todo sale de las transacciones públicas guardadas en <code>historia/</code>: el crudo del explorador en <code>raw/</code> y un movimiento por línea en <code>mov/</code>.
+    Los saldos históricos son una reconstrucción aritmética (saldo de hoy menos los movimientos posteriores) y el reparto de montos cuando una transacción de Bitcoin o Litecoin paga a varios destinos usa la convención proporcional habitual: para afirmar algo, verifica en el explorador con los enlaces de cada fila.
+    Que unos fondos hayan salido hacia una dirección no dice quién la controla; eso solo puede establecerlo la Fiscalía.
   </footer>
 </main>
+<div id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const EXP={BTC:a=>`https://mempool.space/address/${a}`,LTC:a=>`https://litecoinspace.org/address/${a}`,XRP:a=>`https://xrpscan.com/account/${a}`,
   TRX:a=>`https://tronscan.org/#/address/${a}`,ETH:a=>`https://etherscan.io/address/${a}`,BSC:a=>`https://bscscan.com/address/${a}`,POLYGON:a=>`https://polygonscan.com/address/${a}`};
-const TX={BTC:h=>`https://mempool.space/tx/${h}`,LTC:h=>`https://litecoinspace.org/tx/${h}`,XRP:h=>`https://xrpscan.com/tx/${h}`,
+const TXU={BTC:h=>`https://mempool.space/tx/${h}`,LTC:h=>`https://litecoinspace.org/tx/${h}`,XRP:h=>`https://xrpscan.com/tx/${h}`,
   TRX:h=>`https://tronscan.org/#/transaction/${h}`,ETH:h=>`https://etherscan.io/tx/${h}`,BSC:h=>`https://bscscan.com/tx/${h}`,POLYGON:h=>`https://polygonscan.com/tx/${h}`};
-const COL={orionx:'var(--acc)',desvio:'var(--bad)',querella:'var(--warn)',externa:'var(--ext)',resumen:'var(--mut)'};
-const num=(n,d=6)=>Number(n).toLocaleString('es-CL',{maximumFractionDigits:d});
-const peso=a=>Math.max(0,...Object.values(a.monto||{}));
-let G,sel=null,redes=new Set(),soloConocidas=false,busq='';
+const COL={orionx:'#0b6e4f',desvio:'#b91c1c',querella:'#b45309',externa:'#7b8794',resumen:'#7b8794'};
+const num=(n,d=4)=>n==null?'—':Number(n).toLocaleString('es-CL',{maximumFractionDigits:d});
+const clp=n=>n==null?'—':'$'+Math.round(n).toLocaleString('es-CL');
+const fecha=t=>new Date(t*1000).toISOString().slice(0,10);
+const tip=document.getElementById('tip');
+const verTip=(e,html)=>{tip.innerHTML=html;tip.style.display='block';
+  tip.style.left=Math.min(innerWidth-330,e.clientX+14)+'px';tip.style.top=Math.min(innerHeight-140,e.clientY+14)+'px'};
+const ocultarTip=()=>tip.style.display='none';
+let SER=null,DES=null,G=null,moneda=null,rango=null;
 
-fetch('historia/grafo.json?t='+Date.now()).then(r=>r.ok?r.json():Promise.reject('falta historia/grafo.json — corre python3 fetch_historia.py')).then(g=>{
-  G=g; const rs=[...new Set(g.nodos.map(n=>n.red))].sort(); redes=new Set(rs);
-  document.getElementById('est').textContent=`${g.nodos.length} direcciones y ${g.aristas.length} flujos · generado ${g.generado}`;
-  document.getElementById('filtros').innerHTML=
-    rs.map(r=>`<label class="f" data-red="${esc(r)}">${esc(r)}</label>`).join('')+
-    `<label class="f off" id="fcon">solo direcciones identificadas</label>`+
-    `<input type="search" id="buscar" placeholder="buscar dirección o etiqueta…" size="26">`;
+Promise.allSettled(['historia/series.json','historia/destinos.json','historia/grafo.json'].map(u=>fetch(u+'?t='+Date.now()).then(r=>r.ok?r.json():null)))
+ .then(([a,b,c])=>{
+  SER=a.value||null; DES=b.value||null; G=c.value||null;
+  if(!SER){document.getElementById('est').textContent='Falta historia/series.json — corre python3 fetch_historia.py';return}
+  document.getElementById('est').innerHTML=`${SER.billeteras.length} direcciones · ${SER.billeteras.reduce((s,b)=>s+b.n,0).toLocaleString('es-CL')} movimientos reconstruidos · saldos al ${esc(SER.saldos_de||'—')} · historia generada ${esc(SER.generado)}`;
+  const vol={}; SER.billeteras.forEach(b=>Object.entries(b.recibido||{}).forEach(([m,v])=>vol[m]=(vol[m]||0)+v*(precio(m)||0)));
+  const ms=Object.keys(vol).sort((x,y)=>vol[y]-vol[x]);
+  moneda=ms[0]||'BTC';
+  document.getElementById('fmonedas').innerHTML='<span class="nota" style="margin-right:4px">Activo:</span>'+
+    ms.map(m=>`<label class="f${m===moneda?' on':''}" data-m="${esc(m)}">${esc(m)}</label>`).join('');
+  document.querySelectorAll('#fmonedas .f').forEach(el=>el.onclick=()=>{moneda=el.dataset.m;
+    document.querySelectorAll('#fmonedas .f').forEach(o=>o.classList.toggle('on',o===el));rango=null;linea()});
+  linea(); saldos(); donde(); if(G) grafoInit();
+ });
+
+function precio(m){const p=(SER.precios||{})[m]||{};return p.clp||0}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tabs button').forEach(o=>o.classList.toggle('on',o===b));
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='s-'+b.dataset.t));
+  if(b.dataset.t==='linea')linea(); if(b.dataset.t==='grafo'&&G)dibujarGrafo();
+});
+
+// ---------------------------------------------------------------- 1. línea de tiempo
+const valorEn=(serie,t)=>{let v=serie.length?serie[0][1]:0;for(const p of serie){if(p[0]>t)break;v=p[1]}return v};
+
+function linea(){
+  const bs=SER.billeteras.filter(b=>b.series&&b.series[moneda]&&b.series[moneda].length);
+  const svg=d3.select('#lienzo'); svg.selectAll('*').remove();
+  if(!bs.length){svg.append('text').attr('x',20).attr('y',30).attr('fill','var(--mut)').text('Sin datos para '+moneda);return}
+  const W=svg.node().clientWidth,H=svg.node().clientHeight,M={t:12,r:14,b:22,l:64};
+  const t0=d3.min(bs,b=>b.series[moneda][0][0]), t1=Math.floor(Date.now()/1000);
+  const [a,z]=rango||[t0,t1];
+  const N=Math.min(900,Math.max(180,Math.round(W)));
+  const ts=d3.range(N).map(i=>a+(z-a)*i/(N-1));
+  const orden=[...bs].sort((p,q)=>(p.tipo==='orionx'?0:1)-(q.tipo==='orionx'?0:1));
+  const datos=ts.map((t,i)=>{const o={t};orden.forEach(b=>o[b.id]=Math.max(0,valorEn(b.series[moneda],t)));return o});
+  const apilado=d3.stack().keys(orden.map(b=>b.id))(datos);
+  const x=d3.scaleUtc().domain([new Date(a*1000),new Date(z*1000)]).range([M.l,W-M.r]);
+  const y=d3.scaleLinear().domain([0,d3.max(apilado.at(-1),d=>d[1])||1]).nice().range([H-M.b,M.t]);
+  const g=svg.append('g');
+  g.append('g').attr('class','eje').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(W/110));
+  g.append('g').attr('class','eje').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(6).tickFormat(v=>num(v,v>1000?0:2)));
+  const color=id=>{const b=orden.find(o=>o.id===id);const i=orden.filter(o=>o.tipo===b.tipo).indexOf(b);
+    return d3.color(COL[b.tipo]||COL.externa).brighter(i*.34).formatHex()};
+  g.selectAll('path.area').data(apilado).join('path').attr('class','area').attr('fill',d=>color(d.key)).attr('fill-opacity',.85)
+   .attr('d',d3.area().x(d=>x(new Date(d.data.t*1000))).y0(d=>y(d[0])).y1(d=>y(d[1])).curve(d3.curveStepAfter));
+  // hitos del caso y guía
+  const guia=g.append('line').attr('class','guia').attr('y1',M.t).attr('y2',H-M.b).style('display','none');
+  svg.on('mousemove',ev=>{const [mx]=d3.pointer(ev);if(mx<M.l||mx>W-M.r)return;
+    const t=x.invert(mx)/1000; guia.style('display',null).attr('x1',mx).attr('x2',mx);
+    const filas=orden.map(b=>[b,valorEn(b.series[moneda],t)]).filter(f=>f[1]>1e-9).sort((p,q)=>q[1]-p[1]);
+    const tot=d3.sum(filas,f=>f[1]);
+    verTip(ev,`<b>${new Date(t*1000).toISOString().slice(0,10)}</b><br><b>${num(tot)} ${esc(moneda)}</b> en total<br>`+
+      filas.slice(0,8).map(f=>`<span style="color:${color(f[0].id)}">■</span> ${esc(f[0].etiqueta)}: ${num(f[1])}`).join('<br>'))})
+   .on('mouseleave',()=>{guia.style('display','none');ocultarTip()});
+  // zoom por arrastre
+  const brush=d3.brushX().extent([[M.l,M.t],[W-M.r,H-M.b]]).on('end',ev=>{
+    if(!ev.selection)return; const [x0,x1]=ev.selection.map(v=>x.invert(v).getTime()/1000);
+    rango=[x0,x1]; linea()});
+  g.append('g').attr('class','brush').call(brush).on('dblclick',()=>{rango=null;linea()});
+  carriles(a,z,x,M);
+}
+
+function carriles(a,z,x,M){
+  const svg=d3.select('#carriles'); svg.selectAll('*').remove();
+  const bs=SER.billeteras.filter(b=>(b.hitos||[]).some(h=>h.moneda===moneda));
+  const W=svg.node().clientWidth,alto=Math.max(160,bs.length*40+34);
+  svg.attr('height',alto).style('height',alto+'px');
+  const y=d3.scalePoint().domain(bs.map(b=>b.id)).range([16,alto-24]).padding(.5);
+  const todos=bs.flatMap(b=>(b.hitos||[]).filter(h=>h.moneda===moneda).map(h=>({...h,id:b.id,tipo:b.tipo})));
+  const r=d3.scaleSqrt().domain([0,d3.max(todos,h=>h.monto)||1]).range([1.6,11]);
+  const g=svg.append('g');
+  g.append('g').attr('class','eje').attr('transform',`translate(0,${alto-20})`).call(d3.axisBottom(x).ticks(W/110));
+  bs.forEach(b=>{g.append('text').attr('x',M.l).attr('y',y(b.id)-9).attr('font-size',10)
+      .attr('fill','var(--mut)').text(b.etiqueta.length>60?b.etiqueta.slice(0,59)+'…':b.etiqueta);
+    g.append('line').attr('x1',M.l).attr('x2',W-M.r).attr('y1',y(b.id)).attr('y2',y(b.id)).attr('stroke','var(--line)')});
+  g.selectAll('circle').data(todos.filter(h=>h.ts>=a&&h.ts<=z)).join('circle')
+   .attr('cx',h=>x(new Date(h.ts*1000))).attr('cy',h=>y(h.id)).attr('r',h=>r(h.monto))
+   .attr('fill',h=>h.sentido==='in'?'var(--acc)':'var(--bad)').attr('fill-opacity',.7).style('cursor','pointer')
+   .on('mousemove',(e,h)=>verTip(e,`<b>${esc((h.fecha||'').slice(0,16))}</b><br>${h.sentido==='in'?'entra':'sale'} <b>${num(h.monto,6)} ${esc(h.moneda)}</b><br>${h.sentido==='in'?'desde':'hacia'} <span class="addr">${esc(h.contra||'—')}</span><br><span class="nota">clic para abrir la transacción</span>`))
+   .on('mouseleave',ocultarTip).on('click',(e,h)=>window.open((TXU[h.red]||(()=>'#'))(h.hash),'_blank','noopener'));
+}
+
+// ---------------------------------------------------------------- 2. saldos por billetera
+function picoConjunto(){
+  // el saldo mayor que llegaron a tener todas las direcciones a la vez, no la suma de sus picos sueltos
+  let mejor=null;
+  const monedas=new Set(SER.billeteras.flatMap(b=>Object.keys(b.series||{})));
+  for(const m of monedas){
+    const bs=SER.billeteras.filter(b=>b.series&&b.series[m]&&b.series[m].length); if(!bs.length)continue;
+    const ts=[...new Set(bs.flatMap(b=>b.series[m].map(p=>p[0])))].sort((a,b)=>a-b);
+    const paso=Math.max(1,Math.ceil(ts.length/6000));
+    for(let i=0;i<ts.length;i+=paso){const t=ts[i];
+      const v=bs.reduce((s,b)=>s+Math.max(0,valorEn(b.series[m],t)),0);
+      if(!mejor||v*precio(m)>mejor.monto*precio(mejor.moneda))mejor={moneda:m,monto:v,fecha:fecha(t)}}}
+  return mejor;
+}
+function valorHoy(b){return Object.entries(b.saldo_hoy||{}).reduce((s,[m,v])=>s+(v||0)*precio(m),0)}
+function saldos(){
+  const bs=SER.billeteras;
+  const of=bs.filter(b=>b.tipo==='orionx'),dv=bs.filter(b=>b.tipo!=='orionx');
+  const suma=a=>a.reduce((s,b)=>s+valorHoy(b),0);
+  const conj=picoConjunto();
+  document.getElementById('csaldos').innerHTML=[
+    ['Hoy en billeteras de OrionX',clp(suma(of)),`${of.length} direcciones identificadas`],
+    ['Hoy en destinos de desvío',clp(suma(dv)),`${dv.length} direcciones a vigilar`],
+    ['Máximo simultáneo',conj?`${num(conj.monto,2)} ${esc(conj.moneda)}`:'—',conj?`todas las direcciones juntas el ${esc(conj.fecha)} · ${clp(conj.monto*precio(conj.moneda))} de hoy`:''],
+    ['Movimientos reconstruidos',bs.reduce((s,b)=>s+b.n,0).toLocaleString('es-CL'),'desde '+(bs.map(b=>b.primera).filter(Boolean).sort()[0]||'').slice(0,10)]
+  ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]}</div></div>`).join('');
+  const filas=[...bs].sort((p,q)=>valorHoy(q)-valorHoy(p));
+  document.getElementById('tsaldos').innerHTML=
+   `<thead><tr><th>Billetera</th><th>Saldo hoy</th><th class="num">Valor CLP</th><th>Pico histórico</th><th class="num">Queda del pico</th><th>Recibido / enviado</th><th>Actividad</th></tr></thead><tbody>`+
+   filas.map(b=>{
+     const sal=Object.entries(b.saldo_hoy||{}).filter(([m,v])=>v).map(([m,v])=>`${num(v,6)} ${esc(m)}`).join('<br>')||'0';
+     const pk=Object.entries(b.picos||{}).sort((p,q)=>q[1].monto*precio(q[0])-p[1].monto*precio(p[0]))[0];
+     const queda=pk?Math.max(0,Math.min(1,((b.saldo_hoy||{})[pk[0]]||0)/(pk[1].monto||1))):0;
+     return `<tr><td><b>${esc(b.etiqueta)}</b><div class="nota"><span class="chip ${esc(b.tipo)}">${esc(b.red)}</span><a class="addr" href="${esc((EXP[b.red]||(()=>'#'))(b.dir))}" target="_blank" rel="noopener">${esc(b.dir.slice(0,20))}…</a></div>${b.nota?`<div class="nota">${esc(b.nota)}</div>`:''}</td>
+       <td class="num">${sal}</td><td class="num">${clp(valorHoy(b))}</td>
+       <td class="num">${pk?`${num(pk[1].monto,4)} ${esc(pk[0])}<div class="nota">${esc((pk[1].fecha||'').slice(0,10))}</div>`:'—'}</td>
+       <td class="num">${pk?`${(queda*100).toFixed(queda<0.01?2:0)}%<div class="mini"><i style="width:${(queda*100).toFixed(1)}%"></i></div>`:'—'}</td>
+       <td class="num">${Object.keys({...b.recibido,...b.enviado}).slice(0,3).map(m=>`<span class="pos">+${num(b.recibido[m]||0,2)}</span> / <span class="neg">−${num(b.enviado[m]||0,2)}</span> ${esc(m)}`).join('<br>')}</td>
+       <td class="nota">${b.n.toLocaleString('es-CL')} mov.<br>${esc((b.primera||'').slice(0,10))} → ${esc((b.ultima||'').slice(0,10))}</td></tr>`}).join('')+`</tbody>`;
+}
+
+// ---------------------------------------------------------------- 3. dónde están los fondos
+let filtroDonde='todos';
+function estado(d){
+  if(d.error||!d.saldo_hoy)return['no consultado','var(--mut)'];
+  const m=Object.keys(d.recibido)[0]; const rec=d.recibido[m]||0, hoy=(d.saldo_hoy||{})[m]||0;
+  if(rec<=0)return['—','var(--mut)'];
+  const p=hoy/rec;
+  if(p>=.95)return['sigue ahí','var(--bad)'];
+  if(p<=.02)return['ya salió','var(--mut)'];
+  return[`queda ${(p*100).toFixed(0)}%`,'var(--warn)'];
+}
+function donde(){
+  if(!DES){document.getElementById('cdonde').innerHTML='<div class="card nota">Falta historia/destinos.json</div>';return}
+  const ds=DES.destinos;
+  const consultados=ds.filter(d=>d.saldo_hoy);
+  const sigue=consultados.filter(d=>estado(d)[0]==='sigue ahí'||estado(d)[0].startsWith('queda'));
+  const enCLP=o=>Object.entries(o||{}).reduce((s,[m,v])=>s+(v||0)*precio(m),0);
+  const salido=ds.reduce((s,d)=>s+enCLP(d.recibido),0)+enCLP((DES.resto||{}).monto);
+  const localizado=sigue.reduce((s,d)=>s+enCLP(d.saldo_hoy),0);
+  const enOrionx=SER.billeteras.filter(b=>b.tipo==='orionx').reduce((s,b)=>s+valorHoy(b),0);
+  document.getElementById('cdonde').innerHTML=[
+    ['Sigue en billeteras de OrionX',clp(enOrionx),'saldo de hoy en las direcciones identificadas'],
+    ['Localizado en destinos',clp(localizado),`${sigue.length} direcciones que aún conservan lo que recibieron`],
+    ['Salida bruta acumulada',clp(salido),`hacia ${(DES.total_destinos||ds.length).toLocaleString('es-CL')} direcciones, sumando cinco años de retiros: no es lo perdido`],
+    ['Ya se movió del primer destino',clp(Math.max(0,salido-localizado)),'llegó a una dirección y volvió a salir: el segundo salto no está reconstruido']
+  ].map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]}</div></div>`).join('');
+  document.getElementById('fdonde').innerHTML='<span class="nota" style="margin-right:4px">Mostrar:</span>'+
+    [['todos','todos los destinos'],['sigue','los que todavía tienen los fondos'],['vigiladas','solo direcciones ya identificadas']]
+    .map(([k,t])=>`<label class="f${filtroDonde===k?' on':''}" data-k="${k}">${t}</label>`).join('');
+  document.querySelectorAll('#fdonde .f').forEach(el=>el.onclick=()=>{filtroDonde=el.dataset.k;donde()});
+  let filas=ds;
+  if(filtroDonde==='sigue')filas=ds.filter(d=>['sigue ahí'].includes(estado(d)[0])||estado(d)[0].startsWith('queda'));
+  if(filtroDonde==='vigiladas')filas=ds.filter(d=>d.vigilada);
+  document.getElementById('tdonde').innerHTML=
+   `<thead><tr><th>Destino</th><th>Recibido desde OrionX</th><th>Saldo hoy</th><th>Estado</th><th>Período</th><th>Salió desde</th></tr></thead><tbody>`+
+   filas.slice(0,300).map(d=>{const[e,c]=estado(d);
+    return `<tr><td>${d.etiqueta?`<b>${esc(d.etiqueta)}</b><br>`:''}<span class="chip ${esc(d.tipo)}">${esc(d.red)}</span>
+        <a class="addr" href="${esc((EXP[d.red]||(()=>'#'))(d.dir))}" target="_blank" rel="noopener">${esc(d.dir)}</a>
+        ${d.nota?`<div class="nota">${esc(d.nota)}</div>`:''}</td>
+      <td class="num">${Object.entries(d.recibido).map(([m,v])=>`${num(v,4)} ${esc(m)}`).join('<br>')}<div class="nota">${d.n} tx</div></td>
+      <td class="num">${d.saldo_hoy?Object.entries(d.saldo_hoy).filter(([m,v])=>v).map(([m,v])=>`${num(v,4)} ${esc(m)}`).join('<br>')||'0':'<span class="nota">—</span>'}</td>
+      <td><span style="color:${c}">${esc(e)}</span></td>
+      <td class="nota">${esc((d.primera||'').slice(0,10))}<br>→ ${esc((d.ultima||'').slice(0,10))}</td>
+      <td class="nota">${esc((d.desde||[]).join(', '))}</td></tr>`}).join('')+`</tbody>`;
+  const r=DES.resto||{};
+  document.getElementById('ndonde').innerHTML=`Se listan los ${Math.min(300,filas.length)} destinos mayores`+
+    (r.n_direcciones?`; las otras ${r.n_direcciones.toLocaleString('es-CL')} direcciones recibieron en conjunto `+
+      Object.entries(r.monto||{}).map(([m,v])=>`${num(v,4)} ${esc(m)}`).join(', ')+` en ${(r.n_tx||0).toLocaleString('es-CL')} transferencias`:'')+
+    `. El saldo de hoy se consultó para los ${DES.destinos.filter(d=>d.saldo_hoy).length} mayores: "sigue ahí" significa que la dirección aún conserva lo que recibió, no que sepamos quién la controla.`;
+}
+
+// ---------------------------------------------------------------- 4. grafo
+let sel=null,redes=new Set(),soloConocidas=false,busq='',sim=null,svgG=null,cont=null;
+function grafoInit(){
+  const rs=[...new Set(G.nodos.map(n=>n.red))].sort(); redes=new Set(rs);
+  document.getElementById('filtros').innerHTML=rs.map(r=>`<label class="f" data-red="${esc(r)}">${esc(r)}</label>`).join('')+
+    `<label class="f off" id="fcon">solo direcciones identificadas</label><input type="search" id="buscar" placeholder="buscar dirección o etiqueta…" size="24">`;
   document.querySelectorAll('#filtros .f[data-red]').forEach(el=>el.onclick=()=>{
-    const r=el.dataset.red; redes.has(r)?redes.delete(r):redes.add(r); el.classList.toggle('off'); dibujar();});
-  document.getElementById('fcon').onclick=e=>{soloConocidas=!soloConocidas; e.target.classList.toggle('off'); dibujar();};
-  document.getElementById('buscar').oninput=e=>{busq=e.target.value.toLowerCase(); dibujar();};
+    const r=el.dataset.red; redes.has(r)?redes.delete(r):redes.add(r); el.classList.toggle('off'); dibujarGrafo()});
+  document.getElementById('fcon').onclick=e=>{soloConocidas=!soloConocidas;e.target.classList.toggle('off');dibujarGrafo()};
+  document.getElementById('buscar').oninput=e=>{busq=e.target.value.toLowerCase();dibujarGrafo()};
   document.getElementById('leyenda').innerHTML=['orionx','desvio','querella','externa'].map(t=>
     `<span class="chip ${t}">${t==='externa'?'contraparte no identificada':t}</span>`).join(' ');
-  dibujar();
-}).catch(e=>{document.getElementById('est').textContent='No se pudo cargar: '+e});
-
-const svg=d3.select('#grafo'), cont=svg.append('g');
-svg.append('defs').append('marker').attr('id','fl').attr('viewBox','0 -5 10 10').attr('refX',18).attr('markerWidth',6)
-   .attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L9,0L0,4').attr('fill','var(--mut)').attr('opacity',.6);
-svg.call(d3.zoom().scaleExtent([.15,6]).on('zoom',e=>cont.attr('transform',e.transform)));
-let sim;
-
-function dibujar(){
+  svgG=d3.select('#grafo');
+  svgG.append('defs').append('marker').attr('id','fl').attr('viewBox','0 -5 10 10').attr('refX',18).attr('markerWidth',6)
+    .attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L9,0L0,4').attr('fill','var(--mut)').attr('opacity',.6);
+  cont=svgG.append('g');
+  svgG.call(d3.zoom().scaleExtent([.15,6]).on('zoom',e=>cont.attr('transform',e.transform)));
+}
+const peso=a=>Math.max(0,...Object.values(a.monto||{}));
+function dibujarGrafo(){
+  if(!cont)return;
   const vis=G.nodos.filter(n=>redes.has(n.red)&&(!soloConocidas||n.conocida||n.tipo==='resumen'));
-  const casa=n=>!busq||((n.dir||'')+' '+(n.etiqueta||'')).toLowerCase().includes(busq);   // la búsqueda resalta, no recorta
+  const casa=n=>!busq||((n.dir||'')+' '+(n.etiqueta||'')).toLowerCase().includes(busq);
   const ids=new Set(vis.map(n=>n.id));
   const ar=G.aristas.filter(a=>ids.has(a.de)&&ids.has(a.a)).map(a=>({...a,source:a.de,target:a.a}));
   const grados=new Map(); ar.forEach(a=>{grados.set(a.de,(grados.get(a.de)||0)+1);grados.set(a.a,(grados.get(a.a)||0)+1)});
   const nodos=vis.filter(n=>n.conocida||grados.get(n.id)).map(n=>({...n}));
-  const idx=new Map(nodos.map(n=>[n.id,n]));
-  const ar2=ar.filter(a=>idx.has(a.de)&&idx.has(a.a));
-  const w=svg.node().clientWidth,h=svg.node().clientHeight;
-  const maxP=Math.max(1,...ar2.map(peso)), anchoL=d3.scaleLinear().domain([0,Math.log10(maxP+1)]).range([.7,7]);
+  const idx=new Map(nodos.map(n=>[n.id,n])); const ar2=ar.filter(a=>idx.has(a.de)&&idx.has(a.a));
+  const W=svgG.node().clientWidth,H=svgG.node().clientHeight;
+  const maxP=Math.max(1,...ar2.map(peso)),anchoL=d3.scaleLinear().domain([0,Math.log10(maxP+1)]).range([.7,7]);
   const r=n=>n.conocida?Math.min(26,11+3.2*Math.log10(1+(n.n||1))):Math.min(15,4+2.6*Math.log10(1+(n.n||1)));
   cont.selectAll('*').remove();
-  const L=cont.append('g').selectAll('line').data(ar2).join('line')
-    .attr('class',a=>'arista'+(a.resumen?' res':'')).attr('stroke-width',a=>anchoL(Math.log10(peso(a)+1))).attr('marker-end','url(#fl)');
+  const L=cont.append('g').selectAll('line').data(ar2).join('line').attr('class',a=>'arista'+(a.resumen?' res':''))
+    .attr('stroke-width',a=>anchoL(Math.log10(peso(a)+1))).attr('marker-end','url(#fl)');
   L.append('title').text(a=>`${a.de.split(':')[1].slice(0,14)}… → ${a.a.split(':')[1].slice(0,14)}…\n${Object.entries(a.monto).map(([m,v])=>num(v,4)+' '+m).join(', ')}\n${a.n} transferencia(s)${a.primera?'\n'+a.primera+' → '+a.ultima:''}`);
   const N=cont.append('g').selectAll('g').data(nodos).join('g').attr('class','nodo').style('cursor','pointer')
-    .style('opacity',d=>casa(d)?1:.13).on('click',(e,d)=>{sel=d.id;panel(d);pintaSel()});
+    .style('opacity',d=>casa(d)?1:.13).on('click',(e,d)=>{sel=d.id;panelNodo(d);cont.selectAll('.nodo').classed('sel',x=>x.id===sel)});
   N.append('circle').attr('r',r).attr('fill',d=>COL[d.tipo]||COL.externa).attr('opacity',d=>d.conocida?1:.75)
    .append('title').text(d=>`${d.etiqueta||'contraparte no identificada'}\n${d.dir}\n${d.n} movimiento(s)`);
   N.filter(d=>d.conocida||d.tipo==='resumen').append('text').attr('dy',d=>-r(d)-7).attr('text-anchor','middle')
    .text(d=>(d.etiqueta||d.dir).slice(0,34));
   if(sim)sim.stop();
   sim=d3.forceSimulation(nodos).force('link',d3.forceLink(ar2).id(d=>d.id).distance(d=>d.resumen?60:120).strength(.35))
-    .force('carga',d3.forceManyBody().strength(d=>d.conocida?-500:-90)).force('centro',d3.forceCenter(w/2,h/2))
+    .force('carga',d3.forceManyBody().strength(d=>d.conocida?-500:-90)).force('centro',d3.forceCenter(W/2,H/2))
     .force('choque',d3.forceCollide().radius(d=>r(d)+8))
     .on('tick',()=>{L.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
-                    N.attr('transform',d=>`translate(${d.x},${d.y})`)});
+      N.attr('transform',d=>`translate(${d.x},${d.y})`)});
   N.call(d3.drag().on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y})
     .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y}).on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}));
-  pintaSel();
-  document.getElementById('est').textContent=`${nodos.length} direcciones y ${ar2.length} flujos en pantalla · generado ${G.generado}`;
 }
-function pintaSel(){cont.selectAll('.nodo').classed('sel',d=>d.id===sel)}
-
-function barras(meses,moneda){
-  const ks=Object.keys(meses); if(!ks.length)return '';
-  const filas=ks.map(k=>[k,meses[k][moneda+'|in']||0,meses[k][moneda+'|out']||0]);
-  const max=Math.max(1,...filas.map(f=>Math.max(f[1],f[2])));
-  const W=Math.max(6,Math.min(18,Math.floor(340/filas.length))),H=54;
-  const VB=Math.max(340,filas.length*W);                    // evita que pocos meses agranden el texto
-  return `<svg width="100%" viewBox="0 0 ${VB} ${H*2+14}" preserveAspectRatio="xMidYMid meet" style="margin-top:6px">`+filas.map((f,i)=>{
-    const hi=H*f[1]/max,ho=H*f[2]/max;
-    return `<rect x="${i*W}" y="${H-hi}" width="${W-1}" height="${hi}" fill="var(--acc)" opacity=".85"><title>${esc(f[0])}: +${num(f[1],4)} ${esc(moneda)}</title></rect>`+
-           `<rect x="${i*W}" y="${H}" width="${W-1}" height="${ho}" fill="var(--bad)" opacity=".85"><title>${esc(f[0])}: -${num(f[2],4)} ${esc(moneda)}</title></rect>`}).join('')+
-    `<text x="0" y="${H*2+11}" font-size="9" fill="var(--mut)">${esc(filas[0][0])}</text>`+
-    `<text x="${VB}" y="${H*2+11}" font-size="9" fill="var(--mut)" text-anchor="end">${esc(filas.at(-1)[0])}</text></svg>`;
-}
-
-function panel(d){
+function panelNodo(d){
   const p=document.getElementById('panel');
-  if(d.tipo==='resumen'){p.innerHTML=`<h3>${esc(d.etiqueta)}</h3><div class="nota">Agrupa las contrapartes de menor monto de esa dirección para no saturar el dibujo. Están todas, una por una, en <code>historia/mov/</code>.</div>`;return}
-  const mon=[...new Set([...Object.keys(d.in||{}),...Object.keys(d.out||{})])]
-    .sort((a,b)=>((d.in[b]||0)+(d.out[b]||0))-((d.in[a]||0)+(d.out[a]||0)));
-  const principal=mon[0];
-  const movs=(d.ultimos||[]);
+  if(d.tipo==='resumen'){p.innerHTML=`<h3>${esc(d.etiqueta)}</h3><div class="nota">Agrupa las contrapartes menores de esa dirección. Están todas en <code>historia/mov/</code> y las mayores en la pestaña “¿Dónde están los fondos?”.</div>`;return}
+  const mon=[...new Set([...Object.keys(d.in||{}),...Object.keys(d.out||{})])].sort((a,b)=>((d.in[b]||0)+(d.out[b]||0))-((d.in[a]||0)+(d.out[a]||0)));
+  const movs=d.ultimos||[];
   p.innerHTML=`<h3>${esc(d.etiqueta||'Contraparte no identificada')}</h3>
     <div><span class="chip ${esc(d.tipo)}">${esc(d.red)} · ${esc(d.tipo)}</span></div>
-    <div class="addr"><a href="${esc((EXP[d.red]||(x=>'#'))(d.dir))}" target="_blank" rel="noopener">${esc(d.dir)}</a></div>
+    <div class="addr" style="margin:6px 0"><a href="${esc((EXP[d.red]||(()=>'#'))(d.dir))}" target="_blank" rel="noopener">${esc(d.dir)}</a></div>
     ${d.nota?`<div class="nota">${esc(d.nota)}</div>`:''}
-    <div class="tot">${mon.slice(0,4).map(m=>`<div><span>${esc(m)}</span><b class="pos">+${num(d.in[m]||0,4)}</b> / <b class="neg">−${num(d.out[m]||0,4)}</b></div>`).join('')||'<div class="nota">sin movimientos de valor</div>'}</div>
-    ${d.total_mov?`<div class="nota">${d.total_mov.toLocaleString('es-CL')} movimientos registrados${d.total_mov>movs.length?` · se listan los ${movs.length} más recientes`:''}</div>`:''}
-    ${principal&&d.meses?`<div class="nota" style="margin-top:8px">Entradas y salidas por mes en ${esc(principal)}</div>${barras(d.meses,principal)}`:''}
+    <div style="margin:8px 0">${mon.slice(0,4).map(m=>`<div><span class="nota">${esc(m)}</span> <b class="pos">+${num(d.in[m]||0)}</b> / <b class="neg">−${num(d.out[m]||0)}</b></div>`).join('')||'<div class="nota">sin movimientos de valor</div>'}</div>
     ${movs.length?`<table><thead><tr><th>Fecha</th><th>Contraparte</th><th class="num">Monto</th></tr></thead><tbody>`+
-      movs.map(m=>`<tr><td><a href="${esc((TX[m.red]||(x=>'#'))(m.hash))}" target="_blank" rel="noopener">${esc((m.fecha||'').slice(0,16))}</a></td>
-        <td class="addr" style="margin:0">${esc((m.contra||'—').slice(0,22))}${(m.contra||'').length>22?'…':''}</td>
-        <td class="num ${m.sentido==='in'?'pos':'neg'}">${m.sentido==='in'?'+':'−'}${num(m.monto,6)} ${esc(m.moneda)}</td></tr>`).join('')+
-      `</tbody></table>`:'<div class="nota">Esta dirección no está en la lista vigilada: solo se guarda su relación con las que sí lo están.</div>'}`;
+      movs.map(m=>`<tr><td><a href="${esc((TXU[m.red]||(()=>'#'))(m.hash))}" target="_blank" rel="noopener">${esc((m.fecha||'').slice(0,16))}</a></td>
+        <td class="addr">${esc((m.contra||'—').slice(0,18))}…</td>
+        <td class="num ${m.sentido==='in'?'pos':'neg'}">${m.sentido==='in'?'+':'−'}${num(m.monto,6)} ${esc(m.moneda)}</td></tr>`).join('')+`</tbody></table>`
+      :'<div class="nota">Esta dirección no está en la lista vigilada: solo se guarda su relación con las que sí lo están.</div>'}`;
 }
-window.addEventListener('resize',()=>{if(G)dibujar()});
+addEventListener('resize',()=>{if(SER)linea(); if(G&&document.getElementById('s-grafo').classList.contains('on'))dibujarGrafo()});
 </script>
 </body>
 </html>
