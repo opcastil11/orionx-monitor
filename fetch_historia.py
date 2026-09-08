@@ -20,13 +20,13 @@ HIST = HERE / "historia"; RAW = HIST / "raw"; MOV = HIST / "mov"
 UA = {"User-Agent": "orionx-monitor/historia (github pages; afectados)"}
 RIPPLE_EPOCH = 946684800          # 2000-01-01, base de los timestamps del XRPL
 PAUSA = {"mempool.space": 0.35, "litecoinspace.org": 0.35, "s2.ripple.com": 0.2, "xrplcluster.com": 0.2,
-         "api.trongrid.io": 0.25, "api.etherscan.io": 0.25, "eth.blockscout.com": 0.4, "polygon.blockscout.com": 0.4}
+         "api.trongrid.io": 0.25, "api.etherscan.io": 0.25, "eth.blockscout.com": 1.2, "polygon.blockscout.com": 1.2}   # sin llave el límite es estrecho
 _ultimo = {}
 
 def iso(ts):
     return dt.datetime.fromtimestamp(int(ts), dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S") if ts else None
 
-def get(url, data=None, headers=None, tries=4):
+def get(url, data=None, headers=None, tries=6):
     """GET/POST con reintentos y una pausa por host para no gatillar rate limits."""
     host = urllib.parse.urlparse(url).netloc
     esperar = PAUSA.get(host, 0.3) - (time.time() - _ultimo.get(host, 0))
@@ -40,8 +40,8 @@ def get(url, data=None, headers=None, tries=4):
                 _ultimo[host] = time.time(); return json.load(r)
         except Exception as e:
             err = e; _ultimo[host] = time.time()
-            espera = 15 if isinstance(e, urllib.error.HTTPError) and e.code in (429, 503) else 3
-            time.sleep(espera + 4 * i)
+            lento = isinstance(e, urllib.error.HTTPError) and e.code in (429, 503)
+            time.sleep(min(120, 20 * (i + 1)) if lento else 3 + 4 * i)   # un 429 se destraba esperando, no insistiendo
     raise RuntimeError(f"{url[:80]}: {err}")
 
 # ---------------------------------------------------------------- almacenamiento
@@ -75,6 +75,48 @@ def estado_leer():
 def estado_guardar(e):
     HIST.mkdir(parents=True, exist_ok=True)
     (HIST / "_estado.json").write_text(json.dumps(e, ensure_ascii=False, indent=1), encoding="utf-8")
+
+# Solo estos contratos cuentan como dinero: las billeteras reciben cientos de tokens
+# de estafa que se hacen pasar por USDT o ETH, y sumarlos falsea cualquier total.
+TOKENS = {
+    "ETH": {"0xdac17f958d2ee523a2206206994597c13d831ec7": "USDT",
+            "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "USDC",
+            "0x6b175474e89094c44da98b954eedeac495271d0f": "DAI",
+            "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599": "WBTC",
+            "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "WETH"},
+    "BSC": {"0x55d398326f99059ff775485246999027b3197955": "USDT",
+            "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": "USDC",
+            "0xe9e7cea3dedca5984780bafc599bd69add087d56": "BUSD"},
+    "POLYGON": {"0xc2132d05d31c914a87c6611c10748aeb04b58e8f": "USDT",
+                "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": "USDC",
+                "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359": "USDC",
+                "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063": "DAI",
+                "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619": "WETH",
+                "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6": "WBTC"},
+    "TRX": {"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t": "USDT",
+            "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8": "USDC"},
+}
+_descartados = defaultdict(int)
+
+def leer_movs(red, direccion):
+    """Movimientos normalizados de una dirección, ya sin los tokens de estafa."""
+    f = MOV / f"{slug(red, direccion)}.jsonl"
+    if not f.exists(): return []
+    fuera = []
+    for l in f.read_text(encoding="utf-8").splitlines():
+        if not l.strip(): continue
+        try: m = json.loads(l)
+        except json.JSONDecodeError: continue     # línea a medio escribir si se lee durante una descarga
+        c = m.get("contrato")
+        if not c and m.get("moneda") in ("TRC20", "ERC20"):
+            _descartados[f"{red}:{m.get('moneda')} sin contrato"] += 1; continue
+        if c:
+            bueno = (TOKENS.get(red) or {}).get(c if red == "TRX" else c.lower())
+            if not bueno:
+                _descartados[f"{red}:{m.get('moneda')}"] += 1; continue
+            m["moneda"] = bueno
+        fuera.append(m)
+    return fuera
 
 def mov(red, h, ts, dir_, contra, sentido, monto, moneda, extra=None):
     m = {"red": red, "hash": h, "ts": int(ts or 0), "fecha": iso(ts), "dir": dir_, "contra": contra,
@@ -293,10 +335,7 @@ def construir_grafo(wallets):
         nodos.setdefault(yo, {"id": yo, "red": red, "dir": a, "etiqueta": w["etiqueta"], "tipo": w["tipo"],
                               "nota": w.get("nota", ""), "conocida": True, "n": 0, "in": defaultdict(float), "out": defaultdict(float)})
         ultimos, meses = [], defaultdict(lambda: defaultdict(float))
-        for l in f.read_text(encoding="utf-8").splitlines():
-            if not l.strip(): continue
-            try: m = json.loads(l)
-            except json.JSONDecodeError: continue      # línea a medio escribir si el grafo se arma durante una descarga
+        for m in leer_movs(red, a):
             if m.get("fecha") and m["sentido"] != "meta":
                 ultimos.append(m); meses[m["fecha"][:7]][m["moneda"] + "|" + m["sentido"]] += m["monto"]
             if m["sentido"] == "meta" or not m.get("contra"):
@@ -379,14 +418,8 @@ def construir_series(wallets):
     fuera = []
     for w in wallets:
         red, a = w["red"], w["direccion"]; yo = f"{red}:{a.lower()}"
-        f = MOV / f"{slug(red, a)}.jsonl"
-        if not f.exists(): continue
-        movs = []
-        for l in f.read_text(encoding="utf-8").splitlines():
-            if not l.strip(): continue
-            try: m = json.loads(l)
-            except json.JSONDecodeError: continue
-            if m["sentido"] in ("in", "out") and m["ts"]: movs.append(m)
+        movs = [m for m in leer_movs(red, a) if m["sentido"] in ("in", "out") and m["ts"]]
+        if not movs: continue
         movs.sort(key=lambda m: m["ts"])
         por_moneda = defaultdict(list)
         for m in movs: por_moneda[m["moneda"]].append(m)
@@ -420,8 +453,11 @@ def construir_series(wallets):
                       "picos": picos, "series": series, "n": len(movs),
                       "primera": iso(movs[0]["ts"]) if movs else None, "ultima": iso(movs[-1]["ts"]) if movs else None,
                       "hitos": sorted(hitos, key=lambda m: m["ts"])})
+    basura = sorted(_descartados.items(), key=lambda x: -x[1])
     datos = {"generado": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-             "saldos_de": cuando, "precios": precios, "billeteras": fuera}
+             "saldos_de": cuando, "precios": precios, "billeteras": fuera,
+             "descartados": {"n": sum(_descartados.values()), "tokens": len(_descartados),
+                             "ejemplos": [k for k, _ in basura[:12]]}}
     (HIST / "series.json").write_text(json.dumps(datos, ensure_ascii=False), encoding="utf-8")
     return datos
 
@@ -433,12 +469,7 @@ def construir_destinos(wallets, top=40, consultar_saldos=True):
     for w in wallets:
         if w["tipo"] != "orionx": continue
         red, a = w["red"], w["direccion"]
-        f = MOV / f"{slug(red, a)}.jsonl"
-        if not f.exists(): continue
-        for l in f.read_text(encoding="utf-8").splitlines():
-            if not l.strip(): continue
-            try: m = json.loads(l)
-            except json.JSONDecodeError: continue
+        for m in leer_movs(red, a):
             if m["sentido"] != "out" or not m.get("contra"): continue
             if (red, m["contra"].lower()) in conocidas and conocidas[(red, m["contra"].lower())]["tipo"] == "orionx":
                 continue                                    # movimientos entre billeteras de la propia OrionX

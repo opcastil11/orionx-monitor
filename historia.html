@@ -114,8 +114,12 @@ Promise.allSettled(['historia/series.json','historia/destinos.json','historia/gr
  .then(([a,b,c])=>{
   SER=a.value||null; DES=b.value||null; G=c.value||null;
   if(!SER){document.getElementById('est').textContent='Falta historia/series.json — corre python3 fetch_historia.py';return}
-  document.getElementById('est').innerHTML=`${SER.billeteras.length} direcciones · ${SER.billeteras.reduce((s,b)=>s+b.n,0).toLocaleString('es-CL')} movimientos reconstruidos · saldos al ${esc(SER.saldos_de||'—')} · historia generada ${esc(SER.generado)}`;
-  const vol={}; SER.billeteras.forEach(b=>Object.entries(b.recibido||{}).forEach(([m,v])=>vol[m]=(vol[m]||0)+v*(precio(m)||0)));
+  const bas=SER.descartados||{};
+  document.getElementById('est').innerHTML=`${SER.billeteras.length} direcciones · ${SER.billeteras.reduce((s,b)=>s+b.n,0).toLocaleString('es-CL')} movimientos reconstruidos · saldos al ${esc(SER.saldos_de||'—')} · historia generada ${esc(SER.generado)}`+
+    (bas.n?` · se descartaron ${bas.n.toLocaleString('es-CL')} envíos de ${bas.tokens} tokens de estafa que se hacen pasar por USDT o ETH`:'');
+  // se ordena por el saldo mayor que llegó a haber, no por el flujo bruto: una billetera de paso
+  // mueve mucho USDT y nunca lo tiene, y arrancar ahí deja la vista casi vacía
+  const vol={}; SER.billeteras.forEach(b=>Object.entries(b.picos||{}).forEach(([m,p])=>vol[m]=(vol[m]||0)+p.monto*(precio(m)||0)));
   const ms=Object.keys(vol).sort((x,y)=>vol[y]-vol[x]);
   moneda=ms[0]||'BTC';
   document.getElementById('fmonedas').innerHTML='<span class="nota" style="margin-right:4px">Activo:</span>'+

@@ -78,9 +78,25 @@
   "ts_transactions_trc20": 1788190212000
  },
  "LTC_ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2": {
-  "pendiente": "9a8898e30bb94b9a8f86e7f1509f1e6ce9db24cda399facfe6131c2ec3d293e6",
-  "completo": 0,
-  "tx": 9475,
-  "actualizado": "2026-09-08 19:40 UTC"
+  "pendiente": null,
+  "completo": true,
+  "tx": 12280,
+  "actualizado": "2026-09-08 19:45 UTC"
+ },
+ "ETH_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
+  "bloque_txlist": 14997010,
+  "tx": 9991,
+  "actualizado": "2026-09-08 19:45 UTC",
+  "error": "https://eth.blockscout.com/api?module=account&action=txlist&address=0x5528D82423: HTTP Error 429: Too Many Requests"
+ },
+ "BSC_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
+  "error": "BSC necesita $ETHERSCAN_KEY (gratis en etherscan.io; Blockscout no cubre BSC)"
+ },
+ "POLYGON_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
+  "bloque_txlist": 93113088,
+  "tx": 14783,
+  "actualizado": "2026-09-08 20:03 UTC",
+  "bloque_tokentx": 73123024,
+  "error": "https://polygon.blockscout.com/api?module=account&action=tokentx&address=0x5528D: HTTP Error 429: Too Many Requests"
  }
 }
