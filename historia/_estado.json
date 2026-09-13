@@ -3,93 +3,92 @@
   "pendiente": null,
   "completo": true,
   "tx": 41477,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_bc1qvf2dukky4sqnc2w2w7p3vp457yyw0c7r8x8qfk": {
   "pendiente": null,
   "completo": true,
   "tx": 327,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_bc1qhfjrk8e7f47jhy3x0rel74hselpm033xp2a4zm": {
   "pendiente": null,
   "completo": true,
   "tx": 569,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_bc1qhvqwnj8phnt3dp2vjv6d8juv3yajxs0mwty4ah": {
   "pendiente": null,
   "completo": true,
   "tx": 2,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_bc1qyejt6cth9dexy25nyevfscjd6jp0tf4u8qrxn7": {
   "pendiente": null,
   "completo": true,
   "tx": 5,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_18AVbcmkSA5V6wtkM17bFH1nqQKEJcikC6": {
   "pendiente": null,
   "completo": true,
   "tx": 298,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "BTC_3EKC5yWLJcM1Ykhz1PQpESjfn4MTAFdDFD": {
   "pendiente": null,
   "completo": true,
   "tx": 54,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "XRP_rhQrkgoV4uza557mW6HbBWMtTDkB7u5yrs": {
   "ledger": 101505944,
   "marker": null,
   "tx": 14311,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "XRP_rfb7HG942J7AXkXXpAButHgnXDcx8jhyrR": {
   "ledger": 106867215,
   "marker": null,
   "tx": 19121,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "XRP_r98GhtACqw8uANemVEoBdCVrBjPzs7mCL5": {
   "ledger": 98481622,
   "marker": null,
   "tx": 26,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "XRP_rhPvt68VonYujDsSkNsC6GX886BnXpwVnC": {
   "ledger": 105935609,
   "marker": null,
   "tx": 10,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "XRP_rUqGoGp64XB58UccLNoKD38v4H5nxCiai2": {
   "ledger": 106632327,
   "marker": null,
   "tx": 8,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "TRX_THR3KSqTNpExXrN7We3DGoiF3nJJCZJW35": {
   "ts_transactions": 1788868884000,
   "tx": 7,
-  "actualizado": "2026-09-12 09:26 UTC",
+  "actualizado": "2026-09-13 10:22 UTC",
   "ts_transactions_trc20": 1788444687000
  },
  "LTC_ltc1qhn4lwx23d60qx7gve0dzjqux5jlyvynm28ura2": {
   "pendiente": null,
   "completo": true,
   "tx": 12280,
-  "actualizado": "2026-09-12 09:26 UTC"
+  "actualizado": "2026-09-13 10:22 UTC"
  },
  "ETH_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
   "bloque_txlist": 25897846,
-  "tx": 33054,
-  "actualizado": "2026-09-12 09:29 UTC",
-  "error": "https://eth.blockscout.com/api?module=account&action=tokentx&address=0x5528D8242: HTTP Error 429: Too Many Requests",
+  "tx": 35146,
+  "actualizado": "2026-09-13 10:23 UTC",
   "bloque_txlistinternal": 24807870,
-  "bloque_tokentx": 24745854
+  "bloque_tokentx": 25897846
  },
  "BSC_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
   "error": "BSC necesita $ETHERSCAN_KEY (gratis en etherscan.io; Blockscout no cubre BSC)"
@@ -97,7 +96,7 @@
  "POLYGON_0x5528D82423d91da8E8FE8066FAb15cc014ebd5e2": {
   "bloque_txlist": 93113088,
   "tx": 38437,
-  "actualizado": "2026-09-12 09:36 UTC",
+  "actualizado": "2026-09-13 10:23 UTC",
   "bloque_tokentx": 92986639
  }
 }
