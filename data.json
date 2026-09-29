@@ -1,39 +1,6 @@
 {
- "actualizado": "2026-09-29 01:49 UTC",
- "precios": {
-  "BTC": {
-   "clp": 80300683,
-   "usd": 82977
-  },
-  "XRP": {
-   "clp": 1427.61,
-   "usd": 1.48
-  },
-  "TRX": {
-   "clp": 323.83,
-   "usd": 0.334624
-  },
-  "LTC": {
-   "clp": 65666,
-   "usd": 67.85
-  },
-  "ETH": {
-   "clp": 2577881,
-   "usd": 2663.79
-  },
-  "BNB": {
-   "clp": 732592,
-   "usd": 757.01
-  },
-  "POL": {
-   "clp": 110.5,
-   "usd": 0.11418
-  },
-  "USDT": {
-   "clp": 967.46,
-   "usd": 0.999699
-  }
- },
+ "actualizado": "2026-09-29 08:21 UTC",
+ "precios": {},
  "billeteras": [
   {
    "red": "BTC",
@@ -48,8 +15,8 @@
    "tokens": {},
    "tx": 41477,
    "ultima": "2026-09-03 16:48 UTC",
-   "valor_clp": 105828996.04387432,
-   "valor_usd": 109356.13841207999
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "BTC",
@@ -64,8 +31,8 @@
    "tokens": {},
    "tx": 328,
    "ultima": "2026-09-24 00:11 UTC",
-   "valor_clp": 281251277.62564075,
-   "valor_usd": 290625.01577406
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "BTC",
@@ -96,8 +63,8 @@
    "tokens": {},
    "tx": 2,
    "ultima": "2026-08-06 15:57 UTC",
-   "valor_clp": 1477532567.1999998,
-   "valor_usd": 1526776.7999999998
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "BTC",
@@ -112,8 +79,8 @@
    "tokens": {},
    "tx": 5,
    "ultima": "2026-08-31 20:35 UTC",
-   "valor_clp": 89766474.51358922,
-   "valor_usd": 92758.27399518
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "BTC",
@@ -160,8 +127,8 @@
    "tokens": {},
    "tx": 6588,
    "ultima": "2026-01-12 05:46 UTC",
-   "valor_clp": 2295.71394402,
-   "valor_usd": 2.37996136
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "XRP",
@@ -176,8 +143,8 @@
    "tokens": {},
    "tx": 61273520,
    "ultima": "2026-09-09 12:02 UTC",
-   "valor_clp": 5307398.76370974,
-   "valor_usd": 5502.16807832
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "XRP",
@@ -192,8 +159,8 @@
    "tokens": {},
    "tx": 7,
    "ultima": "2025-08-29 03:46 UTC",
-   "valor_clp": 1526.53623495,
-   "valor_usd": 1.5825566000000002
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "XRP",
@@ -208,8 +175,8 @@
    "tokens": {},
    "tx": 100943928,
    "ultima": "2026-07-29 17:22 UTC",
-   "valor_clp": 1427.61285522,
-   "valor_usd": 1.48000296
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "XRP",
@@ -224,8 +191,8 @@
    "tokens": {},
    "tx": 105935604,
    "ultima": "2026-08-29 23:23 UTC",
-   "valor_clp": 830807820.0724319,
-   "valor_usd": 861296.554176
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "TRX",
@@ -242,8 +209,8 @@
    },
    "tx": 137971,
    "ultima": "2026-09-25 06:47 UTC",
-   "valor_clp": 83060811.53456801,
-   "valor_usd": 85829.3838056546
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "LTC",
@@ -258,8 +225,8 @@
    "tokens": {},
    "tx": 12280,
    "ultima": "2026-08-31 22:53 UTC",
-   "valor_clp": 38491813.019108385,
-   "valor_usd": 39772.0207313755
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "ETH",
@@ -276,8 +243,8 @@
    },
    "tx": 21746,
    "ultima": "21746 tx enviadas (nonce)",
-   "valor_clp": 28221375.475154065,
-   "valor_usd": 29161.861687430963
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "BSC",
@@ -294,8 +261,8 @@
    },
    "tx": 46073,
    "ultima": "46073 tx enviadas (nonce)",
-   "valor_clp": 9634190.483460099,
-   "valor_usd": 9955.270420667188
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   },
   {
    "red": "POLYGON",
@@ -312,8 +279,8 @@
    },
    "tx": 3564,
    "ultima": "3564 tx enviadas (nonce)",
-   "valor_clp": 22051597.221441053,
-   "valor_usd": 22786.076174709033
+   "valor_clp": 0.0,
+   "valor_usd": 0.0
   }
  ],
  "eventos": [
@@ -364,6 +331,6 @@
   }
  ],
  "errores": [],
- "total_clp": 2971959571.8160114,
- "total_usd": 3073825.005776397
+ "total_clp": 0.0,
+ "total_usd": 0.0
 }
